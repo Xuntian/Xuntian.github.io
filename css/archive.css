@@ -1,0 +1,14 @@
+.archive .archive-counter {
+  text-align: center;
+}
+.archive .archive-title {
+  text-align: left;
+  margin: 10px;
+}
+.archive .archive-article {
+  text-align: left;
+}
+.archive .archive-article .post-title {
+  padding: 0;
+  margin: 0;
+}

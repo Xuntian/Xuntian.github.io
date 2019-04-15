@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    
+    <meta name="keywords" content="Blog, Computer Science, Hexo">
+    
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="Xuntian" type="application/atom+xml" />
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    
+    
+<link rel="stylesheet" type="text/css" href="/css/page.css">
+<link rel="stylesheet" type="text/css" href="/css/post.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/solarized-dark.css">
+    <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script defer type="text/javascript" src="/js/util.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
+    <script defer type="text/javascript" src="/js/lightgallery.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-hash.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-pager.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-zoom.min.js"></script>
+    
+    
+    <script defer type="text/javascript" src="/js/search.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+      var searchPath = "search.xml";
+      if (searchPath.length === 0) {
+        searchPath = "search.xml";
+      }
+      var path = "/" + searchPath;
+      searchFunc(path, "search-input", "search-result");
+    });
+    </script>
+    
+    
+    <script defer type="text/javascript" src="/js/index.js"></script>
+    
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <title>Gitlab Cluster | Xuntian - Lizhiqiang's blog</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage" lang="en"  data-spy="scroll" data-target=".list-group">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <h1 class="title"><a href="/">Xuntian</a></h1>
+        <h2 class="subtitle">Lizhiqiang's blog</h2>
+      </div>
+      
+      <div class="logo">
+        <img src="/images/logo.png" alt="logo">
+      </div>
+      
+    </div>
+    
+<nav id="nav" class="nav">
+  <a id="nav-toggle" class="nav-toggle"><i class="fas fa-bars"></i></a>
+  <ul id="menu">
+    
+    <li><a href="/">Home</a></li>
+    
+    <li><a href="/archives/">Archives</a></li>
+    
+    <li><a href="/categories/">Categories</a></li>
+    
+    <li><a href="/tags/">Tags</a></li>
+    
+    <li><a href="/about/">About</a></li>
+    
+  </ul>
+</nav>
+
+
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="post" class="post">
+  
+  <article class="post-article card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="http://www.lizq.top/2017/06/01/CS/Git/gitlab_cluster/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+       <meta itemprop="name" content="LiZhiqiang">
+       <meta itemprop="description" content="Computer enthusiasts">
+       <meta itemprop="image" content="/images/github.jpg">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+       <meta itemprop="name" content="Xuntian">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">Gitlab Cluster</h1>
+      <div class="post-meta">
+        
+        <span class="post-date">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2017-06-01T00:00:00+08:00">2017-06-01</time></span>
+          <!--
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2017-06-01T00:00:00+08:00">2017-06-01 00:00:00</time></span>
+          -->
+        </span>
+        
+        
+        
+        <span class="post-meta-divider divider">|</span>
+        
+        <span class="post-categories">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/application/" itemprop="url" rel="index"><span itemprop="name">application</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/application/gitlab/" itemprop="url" rel="index"><span itemprop="name">gitlab</span></a></span>
+        </span>
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      <h1 id="Gitlab集群"><a href="#Gitlab集群" class="headerlink" title="Gitlab集群"></a>Gitlab集群</h1><h2 id="总体架构"><a href="#总体架构" class="headerlink" title="总体架构"></a>总体架构</h2><p>总共架构由5部分组成</p>
+<ul>
+<li>Postgresql</li>
+<li>Redis</li>
+<li>Gitlab</li>
+<li>NFS</li>
+<li>LB</li>
+</ul>
+<p><img src="https://docs.gitlab.com/ce/administration/img/high_availability/active-active-diagram.png" alt="Configuration"><br><a id="more"></a></p>
+<h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><p>Gitlab官网上的文档说到的方案是搭建一个稳定高可用性的Redis集群，我在这里做了简化，只用docker搭建了单个节点的Redis服务<br><figure class="hljs highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">run</span> -dti <span class="comment">--name redis -p 6379:6379 redis</span></span><br></pre></td></tr></table></figure></p>
+<p>Redis服务的主机IP和端口号将在gitlab配置中用到</p>
+<h2 id="Postgresql"><a href="#Postgresql" class="headerlink" title="Postgresql"></a>Postgresql</h2><p>Posstgresql服务是利用postgresql官方提供的docker镜像搭建的，执行命令如下<br><figure class="hljs highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="builtin-name">run</span> --name db -dti -p 5432:5432 -e <span class="attribute">POSTGRES_PASSWORD</span>=123456 -e <span class="attribute">POSTGRES_USER</span>=gitlab postgres</span><br></pre></td></tr></table></figure></p>
+<p>Postgresql服务的主机IP，端口，数据库用户名，数据库名称和密码也将在gitlab的配置中用到</p>
+<ul>
+<li>注：这里postgresql镜像使用的postgresql版本建议和下面使用到的gitlab自带的postgresql数据库版本一致，方便之后的数据迁移</li>
+</ul>
+<h2 id="Gitlab"><a href="#Gitlab" class="headerlink" title="Gitlab"></a>Gitlab</h2><p>根据需求，使用了Gitlab最新版本的官方docker镜像在不同的主机上搭建gitlab服务，最新版本为gitlab:9.4.2</p>
+<ul>
+<li><p>首先在host1新建一个文件夹/root/git-data,用作运行在docker上gitlab容器的数据卷,该数据卷存储的是gitlab中repositories的数据</p>
+<figure class="hljs highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker run --detach \</span><br><span class="line">    -<span class="ruby">-publish <span class="number">80</span><span class="symbol">:</span><span class="number">80</span> \</span></span><br><span class="line"><span class="ruby">    --name gitlab4 \</span></span><br><span class="line"><span class="ruby">    --restart always \</span></span><br><span class="line"><span class="ruby">    --volume /root/git-<span class="symbol">data:</span>/var/opt/gitlab/git-data \</span></span><br><span class="line"><span class="ruby">    <span class="symbol">gitlab:</span><span class="number">9.4</span>.<span class="number">2</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行gitlab的docker镜像之后，等待一两分钟gitlab将会启动配置好，将可以在host1在80端口访问gitlab等登录界面。之后docker exec 进入容器，编辑/etc/gitlab/gitlab.rb配置文件，如下</p>
+<figure class="hljs highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">gitlab_rails[<span class="string">'db_adapter'</span>] = <span class="string">"postgresql"</span></span><br><span class="line">gitlab_rails[<span class="string">'db_encoding'</span>] = <span class="string">"unicode"</span></span><br><span class="line">gitlab_rails[<span class="string">'db_database'</span>] = <span class="string">"gitlab"</span></span><br><span class="line">gitlab_rails[<span class="string">'db_pool'</span>] = <span class="number">10</span></span><br><span class="line">gitlab_rails[<span class="string">'db_username'</span>] = <span class="string">"gitlab"</span></span><br><span class="line">gitlab_rails[<span class="string">'db_password'</span>] = <span class="string">"123456"</span></span><br><span class="line">gitlab_rails[<span class="string">'db_host'</span>] = <span class="string">"&#123;ip&#125;"</span></span><br><span class="line">gitlab_rails[<span class="string">'db_port'</span>] = <span class="number">5432</span></span><br><span class="line">gitlab_rails[<span class="string">'redis_host'</span>] = <span class="string">"&#123;ip&#125;"</span></span><br><span class="line">gitlab_rails[<span class="string">'redis_port'</span>] = <span class="number">6379</span></span><br><span class="line">gitlab_rails[<span class="string">'redis_database'</span>] = <span class="number">0</span></span><br><span class="line">postgresql[<span class="string">'enable'</span>] = false</span><br><span class="line">redis[<span class="string">'enable'</span>] = false</span><br><span class="line">nginx[<span class="string">'enable'</span>] = true</span><br><span class="line">nginx[<span class="string">'redirect_http_to_https'</span>] = true</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>/etc/gitlab/gitlab.rb配置文件中的Redis和Postgresql信息应该与之前搭建的服务一致，之后运行以下命令配置gitlab服务<br><figure class="hljs highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">gitlab-ctl reconfigure</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>之后可以在更多的主机上按照以上步骤搭建gitlab服务，比如host2，host3。每一个主机上的gitlab服务都共用Redis和Postgresql,因此可以保证账户，密码和配置数据的一致，但是gitlab还有repositories数据是存放在/var/opt/gitlab/git-data文件夹下的，也就是宿主机的数据卷/root/git-data中，所以我们还需要对每台主机上的/root/git-data/文件夹做数据同步，这里我们搭建NFS来实现</li>
+</ul>
+<h2 id="NFS服务"><a href="#NFS服务" class="headerlink" title="NFS服务"></a>NFS服务</h2><p>我们利用NFS服务实现多台主机上的文件同步, 可以任选一台搭建了gitlab服务的主机作为NFS Server，并将该主机上的/root/git-data文件夹对其他主机exports,供其他主机的文件系统挂载到NFS Server这台主机上的/root/git-data文件夹，从而实现文件同步</p>
+<ul>
+<li>在NFS Server主机上安装nfs server服务</li>
+</ul>
+<figure class="hljs highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">apt-<span class="builtin-name">get</span> update</span><br><span class="line">apt-<span class="builtin-name">get</span> install nfs-kernel-server  # install nfs server</span><br><span class="line"></span><br><span class="line">chown nobody:nogroup /root/git-data   # modify dir owner</span><br></pre></td></tr></table></figure>
+<ul>
+<li>编辑nfs server配置文件/etc/exports</li>
+</ul>
+<figure class="hljs highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/root/git-<span class="class"><span class="keyword">data</span>  *(<span class="title">rw</span>,<span class="title">sync</span>,<span class="title">no_root_squash</span>,<span class="title">no_subtree_check</span>)</span></span><br></pre></td></tr></table></figure>
+<p>* 表示任意主机，rw表示读写读写权限，sync表示文件修改将写入硬盘，no_subtree_check禁止子文件夹检查，no_root_squash禁止客户端的root用户在服务器端使用root权限</p>
+<ul>
+<li>重启nfs-kernel-server服务</li>
+</ul>
+<figure class="hljs highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service nfs-kernel-<span class="keyword">server</span> restart</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在nfs clinet主机上安装nfs 客户端程序</li>
+</ul>
+<figure class="hljs highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt-<span class="builtin-name">get</span> update</span><br><span class="line">apt-<span class="builtin-name">get</span> install nfs-common</span><br></pre></td></tr></table></figure>
+<ul>
+<li>将nfs client主机上的文件夹挂载到nfs server主机上需要文件同步的文件夹上</li>
+</ul>
+<figure class="hljs highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount &#123;nfs-server-ip&#125;<span class="symbol">:/root/git-data</span> /root/git-data</span><br></pre></td></tr></table></figure>
+<h2 id="Gitlab数据备份与恢复"><a href="#Gitlab数据备份与恢复" class="headerlink" title="Gitlab数据备份与恢复"></a>Gitlab数据备份与恢复</h2><ul>
+<li>备份</li>
+</ul>
+<figure class="hljs highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">gitlab-rake gitlab:<span class="keyword">backup</span>:<span class="keyword">create</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Or</span></span><br><span class="line">docker exec -t &lt;<span class="keyword">container</span> <span class="keyword">name</span>&gt; gitlab-rake gitlab:<span class="keyword">backup</span>:<span class="keyword">create</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>恢复</li>
+</ul>
+<figure class="hljs highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cp</span> <span class="number">1493107454</span>_2017_04_25_9.<span class="number">1.0</span>_gitlab_backup.tar /var/<span class="keyword">opt</span>/gitlab/backups/  # <span class="keyword">put</span> baskup <span class="keyword">file</span> under given dir</span><br><span class="line"></span><br><span class="line">gitlab-ctl <span class="keyword">stop</span> unicorn</span><br><span class="line">gitlab-ctl <span class="keyword">stop</span> sidekiq</span><br><span class="line">gitlab-ctl status</span><br><span class="line"></span><br><span class="line">gitlab-rake gitla<span class="variable">b:backup</span>:restore BACKUP=<span class="number">1493107454</span>_2017_04_25_9.<span class="number">1.0</span></span><br><span class="line">gitlab-ctl start</span><br><span class="line">gitlab-rake gitla<span class="variable">b:check</span> SANITIZE=true</span><br></pre></td></tr></table></figure>
+<h2 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h2><ul>
+<li>编辑nginx配置文件/etc/nginx/nginx.conf    </li>
+</ul>
+<figure class="hljs highlight puppet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">upstream <span class="keyword">myapp</span> &#123;</span><br><span class="line">    server &#123;<span class="literal">ip</span>&#125;:8080;</span><br><span class="line">    <span class="keyword">server</span> &#123;<span class="literal">ip</span>&#125;:5432;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">server</span> &#123;</span><br><span class="line">    listen <span class="number">80</span>;</span><br><span class="line">    server_name &#123;<span class="literal">ip</span>&#125;;</span><br><span class="line">    location / &#123;</span><br><span class="line">        proxy_set_header HOST <span class="variable">$http_host</span>;</span><br><span class="line">        proxy_set_header X-Forwarded-For <span class="variable">$remote_addr</span>;</span><br><span class="line">        proxy_pass http://myapp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><ol>
+<li>清除redis缓存     </li>
+</ol>
+<figure class="hljs highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitlab-rake cache:clear <span class="attribute">RAILS_ENV</span>=production</span><br></pre></td></tr></table></figure>
+<figure class="hljs highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name gitlab2 -p <span class="number">8099</span>:<span class="number">80</span> -v <span class="regexp">/home/</span>lzq<span class="regexp">/git-config2/</span><span class="string">gitlab:</span><span class="regexp">/etc/</span>gitlab -v <span class="regexp">/home/</span>lzq<span class="regexp">/gitlab-data2:/</span>gitlab-data twang2218/gitlab-ce-<span class="string">zh:</span><span class="number">9.4</span><span class="number">.3</span></span><br></pre></td></tr></table></figure>
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        
+        
+        
+        
+        <a class="post-tag button" href="/tags/gitlab/" style="background: #fc6423;" rel="tag"><i class="fas fa-tags"></i>gitlab</a>
+        
+      </div>
+      
+    </footer>
+  </article>
+  
+  
+  <div class="post-nav">
+    <div class="post-nav-next post-nav-item">
+      
+      <a href="/2017/01/19/CS/Linux/shell流程控制/" rel="next" title="Shell流程控制"><i class="fas fa-angle-left"></i><span class="nav-title">Shell流程控制</span></a>
+      
+    </div>
+    <div class="post-nav-prev post-nav-item">
+      
+      <a href="/2017/08/11/CS/Linux/文本处理/" rel="prev" title="文本处理"><span class="nav-title">文本处理</span><i class="fas fa-angle-right"></i></a>
+      
+    </div>
+  </div>
+  
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar" style="background: url(/images/sidebar_background.png);">
+  
+  <div class="search">
+    <div class="form-group">
+      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="Search" class="form-control"/>
+    </div>
+  </div>
+  <div class="search-result-box" id="search-result"></div>
+  
+  
+<div class="info sidebar-item" id="info">
+  
+  <img class="author-avatar" src="/images/github.jpg" alt="LiZhiqiang">
+  
+  <h1 class="author-name">LiZhiqiang</h1>
+  <h2 class="author-description"> Computer enthusiasts</h2>
+  <div class="site-count">
+    
+    <div class="archives-count">
+      <div class="site-count-title">Archives</div>
+      <div><a href="/archives/">20</a></div>
+    </div>
+    
+    
+    
+    <span class="site-count-divider divider">|</span>
+    
+    <div class="categories-count">
+      <div class="site-count-title">Categories</div>
+      <div><a href="/categories/">16</a></div>
+    </div>
+    
+    
+    
+    <span class="site-count-divider divider">|</span>
+    
+    <div class="tags-count">
+      <div class="site-count-title">Tags</div>
+      <div><a href="/tags/">20</a></div>
+    </div>
+    
+  </div>
+  
+  <div class="rss">
+    <a class="rss-link button sidebar-item" href="/atom.xml"><i class="fas fa-rss"></i>RSS</a>
+  </div>
+  
+</div>
+
+
+  <div class="sidebar-sticky">
+    
+    
+
+
+
+
+<hr>
+<div class="post-toc sidebar-item" id="toc-div">
+  <div><i class="fas fa-list-ol"></i>Table of Contents</div>
+  <div class="post-toc-content"><ol class="list-group toc"><li class="toc-item toc-level-1"><a class="list-group-item toc-link" href="#Gitlab集群"><span class="toc-text">Gitlab集群</span></a><ol class="list-group toc-child"><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#总体架构"><span class="toc-text">总体架构</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#Redis"><span class="toc-text">Redis</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#Postgresql"><span class="toc-text">Postgresql</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#Gitlab"><span class="toc-text">Gitlab</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#NFS服务"><span class="toc-text">NFS服务</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#Gitlab数据备份与恢复"><span class="toc-text">Gitlab数据备份与恢复</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#负载均衡"><span class="toc-text">负载均衡</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#遇到的问题"><span class="toc-text">遇到的问题</span></a></li></ol></li></ol></div>
+</div>
+
+
+
+    
+    
+    
+<hr>
+<div class="social-link sidebar-item">
+  <div><i class="far fa-address-card"></i>Social Links</p></div>
+  <ul>
+    
+    <li><i class="fas fa-envelope"></i><a href="mailto:li.zq@foxmail.com" target="_blank">li.zq@foxmail.com</a></li>
+    
+    <li><i class="fab fa-github"></i><a href="https://github.com/Xuntian" target="_blank">Xuntian</a></li>
+    
+  </ul>
+</div>
+
+
+    
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <a id="back-to-top"><i class="fas fa-angle-double-up"></i></a>
+    </div>
+    <div class="footer-container">
+      <div class="footer-center">
+        <div class="copyright">
+          <span class="author">LiZhiqiang</span><span class="year"><i class="far fa-copyright"></i>2016 - 2019</span>
+        </div>
+        
+        <div class="custom-info">
+          
+          Powered by Hexo and ARIA
+          
+        </div>
+      </div>
+      <!--
+      <div class="footer-right">
+        
+        <div class="custom-info">
+          
+          Powered by Hexo and ARIA
+          
+        </div>
+        
+        <div class="powered-by">
+          Proudly Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> | Theme is <a href="https://github.com/AlynxZhou/hexo-theme-aria/" target="_blank">ARIA</a>
+        </div>
+      </div>
+      -->
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>

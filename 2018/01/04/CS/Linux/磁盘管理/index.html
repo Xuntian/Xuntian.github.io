@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    
+    <meta name="keywords" content="Blog, Computer Science, Hexo">
+    
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="Xuntian" type="application/atom+xml" />
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    
+    
+<link rel="stylesheet" type="text/css" href="/css/page.css">
+<link rel="stylesheet" type="text/css" href="/css/post.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/solarized-dark.css">
+    <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script defer type="text/javascript" src="/js/util.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
+    <script defer type="text/javascript" src="/js/lightgallery.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-hash.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-pager.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-zoom.min.js"></script>
+    
+    
+    <script defer type="text/javascript" src="/js/search.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+      var searchPath = "search.xml";
+      if (searchPath.length === 0) {
+        searchPath = "search.xml";
+      }
+      var path = "/" + searchPath;
+      searchFunc(path, "search-input", "search-result");
+    });
+    </script>
+    
+    
+    <script defer type="text/javascript" src="/js/index.js"></script>
+    
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <title>磁盘管理 | Xuntian - Lizhiqiang's blog</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage" lang="en"  data-spy="scroll" data-target=".list-group">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <h1 class="title"><a href="/">Xuntian</a></h1>
+        <h2 class="subtitle">Lizhiqiang's blog</h2>
+      </div>
+      
+      <div class="logo">
+        <img src="/images/logo.png" alt="logo">
+      </div>
+      
+    </div>
+    
+<nav id="nav" class="nav">
+  <a id="nav-toggle" class="nav-toggle"><i class="fas fa-bars"></i></a>
+  <ul id="menu">
+    
+    <li><a href="/">Home</a></li>
+    
+    <li><a href="/archives/">Archives</a></li>
+    
+    <li><a href="/categories/">Categories</a></li>
+    
+    <li><a href="/tags/">Tags</a></li>
+    
+    <li><a href="/about/">About</a></li>
+    
+  </ul>
+</nav>
+
+
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="post" class="post">
+  
+  <article class="post-article card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="http://www.lizq.top/2018/01/04/CS/Linux/磁盘管理/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+       <meta itemprop="name" content="LiZhiqiang">
+       <meta itemprop="description" content="Computer enthusiasts">
+       <meta itemprop="image" content="/images/github.jpg">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+       <meta itemprop="name" content="Xuntian">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">磁盘管理</h1>
+      <div class="post-meta">
+        
+        <span class="post-date">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2018-01-04T00:00:00+08:00">2018-01-04</time></span>
+          <!--
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2018-01-04T00:00:00+08:00">2018-01-04 00:00:00</time></span>
+          -->
+        </span>
+        
+        
+        
+        <span class="post-meta-divider divider">|</span>
+        
+        <span class="post-categories">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
+        </span>
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      <h2 id="df命令"><a href="#df命令" class="headerlink" title="df命令"></a>df命令</h2><figure class="hljs highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby">a或--all：包含全部的文件系统；</span></span><br><span class="line"><span class="ruby">--block-size=&lt;区块大小&gt;：以指定的区块大小来显示区块数目；</span></span><br><span class="line"><span class="ruby">-h或--human-readable：以可读性较高的方式来显示信息；</span></span><br><span class="line"><span class="ruby">-H或--si：与-h参数相同，但在计算时是以<span class="number">1000</span> Bytes为换算单位而非<span class="number">1024</span> Bytes；</span></span><br><span class="line"><span class="ruby">-i或--inodes：显示inode的信息；</span></span><br><span class="line"><span class="ruby">-k或--kilobytes：指定区块大小为<span class="number">1024</span>字节；</span></span><br><span class="line"><span class="ruby">-l或--local：仅显示本地端的文件系统；</span></span><br><span class="line"><span class="ruby">-m或--megabytes：指定区块大小为<span class="number">1048576</span>字节；</span></span><br><span class="line"><span class="ruby">--no-sync：在取得磁盘使用信息前，不要执行sync指令，此为预设值；</span></span><br><span class="line"><span class="ruby">-P或--portability：使用POSIX的输出格式；</span></span><br><span class="line"><span class="ruby">--sync：在取得磁盘使用信息前，先执行sync指令；</span></span><br><span class="line"><span class="ruby">-t&lt;文件系统类型&gt;或--type=&lt;文件系统类型&gt;：仅显示指定文件系统类型的磁盘信息；</span></span><br><span class="line"><span class="ruby">-T或--print-type：显示文件系统的类型；</span></span><br><span class="line"><span class="ruby">-x&lt;文件系统类型&gt;或--exclude-type=&lt;文件系统类型&gt;：不要显示指定文件系统类型的磁盘信息；</span></span><br><span class="line"><span class="ruby">--help：显示帮助；</span></span><br><span class="line"><span class="ruby">--version：显示版本信息。</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="du命令"><a href="#du命令" class="headerlink" title="du命令"></a>du命令</h2><figure class="hljs highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby">a或-all 显示目录中个别文件的大小。</span></span><br><span class="line"><span class="ruby">-b或-bytes 显示目录或文件大小时，以byte为单位。</span></span><br><span class="line"><span class="ruby">-c或--total 除了显示个别目录或文件的大小外，同时也显示所有目录或文件的总和。</span></span><br><span class="line"><span class="ruby">-k或--kilobytes 以KB(<span class="number">1024</span>bytes)为单位输出。</span></span><br><span class="line"><span class="ruby">-m或--megabytes 以MB为单位输出。</span></span><br><span class="line"><span class="ruby">-s或--summarize 仅显示总计，只列出最后加总的值。</span></span><br><span class="line"><span class="ruby">-h或--human-readable 以K，M，G为单位，提高信息的可读性。</span></span><br><span class="line"><span class="ruby">-x或--one-file-xystem 以一开始处理时的文件系统为准，若遇上其它不同的文件系统目录则略过。</span></span><br><span class="line"><span class="ruby">-L&lt;符号链接&gt;或--dereference&lt;符号链接&gt; 显示选项中所指定符号链接的源文件大小。</span></span><br><span class="line"><span class="ruby">-S或--separate-dirs 显示个别目录的大小时，并不含其子目录的大小。</span></span><br><span class="line"><span class="ruby">-X&lt;文件&gt;或--exclude-from=&lt;文件&gt; 在&lt;文件&gt;指定目录或文件。</span></span><br><span class="line"><span class="ruby">--exclude=&lt;目录或文件&gt; 略过指定的目录或文件。</span></span><br><span class="line"><span class="ruby">-D或--dereference-args 显示指定符号链接的源文件大小。</span></span><br><span class="line"><span class="ruby">-H或--si 与-h参数相同，但是K，M，G是以<span class="number">1000</span>为换算单位。</span></span><br><span class="line"><span class="ruby">-l或--count-links 重复计算硬件链接的文件。</span></span><br></pre></td></tr></table></figure>
+<figure class="hljs highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#显示当前目录下文件的大小，-d <span class="number">1</span>为指定检索深度depth=<span class="number">1</span></span><br><span class="line">du -h -d <span class="number">1</span> ./</span><br></pre></td></tr></table></figure>
+<h2 id="fdisk命令"><a href="#fdisk命令" class="headerlink" title="fdisk命令"></a>fdisk命令</h2><p>fdisk命令用于观察硬盘实体使用情况，和对硬盘分区<br><figure class="hljs highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#参数</span><br><span class="line">-b&lt;分区大小&gt;：指定每个分区的大小；</span><br><span class="line">-l：列出指定的外围设备的分区表状况；</span><br><span class="line">-s&lt;分区编号&gt;：将指定的分区大小输出到标准输出上，单位为区块；</span><br><span class="line">-u：搭配<span class="string">"-l"</span>参数列表，会用分区数目取代柱面数目，来表示每个分区的起始地址；</span><br><span class="line">-v：显示版本信息。</span><br><span class="line"></span><br><span class="line"># fdisk /dev/sdb</span><br><span class="line">command (m <span class="keyword">for</span> help): m</span><br><span class="line">Command action</span><br><span class="line">   a   toggle a bootable flag</span><br><span class="line">   b   edit bsd disklabel</span><br><span class="line">   c   toggle the dos compatibility flag</span><br><span class="line">   d   <span class="built_in">delete</span> a <span class="built_in">partition</span></span><br><span class="line">   l   list known <span class="built_in">partition</span> types</span><br><span class="line">   m   <span class="built_in">print</span> this menu</span><br><span class="line">   n   add a <span class="built_in">new</span> <span class="built_in">partition</span></span><br><span class="line">   o   create a <span class="built_in">new</span> empty DOS <span class="built_in">partition</span> table</span><br><span class="line">   p   <span class="built_in">print</span> the <span class="built_in">partition</span> table</span><br><span class="line">   q   <span class="built_in">quit</span> without <span class="built_in">saving</span> changes</span><br><span class="line">   s   create a <span class="built_in">new</span> empty Sun disklabel</span><br><span class="line">   t   change a <span class="built_in">partition</span>'s <span class="built_in">system</span> id</span><br><span class="line">   u   change <span class="built_in">display</span>/entry <span class="built_in">units</span></span><br><span class="line">   v   verify the <span class="built_in">partition</span> table</span><br><span class="line">   w   write table to disk <span class="keyword">and</span> exit</span><br><span class="line">   x   extra functionality (experts only)</span><br></pre></td></tr></table></figure></p>
+<h2 id="parted命令"><a href="#parted命令" class="headerlink" title="parted命令"></a>parted命令</h2><p>parted命令是由GNU组织开发的一款功能强大的磁盘分区和分区大小调整工具，与fdisk不同，它支持调整分区的大小。作为一种设计用于Linux的工具，它没有构建成处理与fdisk关联的多种分区类型，但是，它可以处理最常见的分区格式，包括：ext2、ext3、fat16、fat32、NTFS、ReiserFS、JFS、XFS、UFS、HFS以及Linux交换分区。<br><figure class="hljs highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">-h：显示帮助信息；</span><br><span class="line">-i：交互式模式；</span><br><span class="line">-s：脚本模式，不提示用户；</span><br><span class="line">-v：显示版本号。</span><br><span class="line"></span><br><span class="line">[root@localhost ~]# parted <span class="regexp">/dev/</span>sdb</span><br><span class="line">GNU Parted Copyright (C) <span class="number">1998</span> - <span class="number">2004</span> free Software Foundation, Inc.</span><br><span class="line"><span class="keyword">This</span> program is free software, covered by the GNU General <span class="keyword">Public</span> License.</span><br><span class="line"><span class="keyword">This</span> program is distributed in the hope that it will be useful, but WITHOUT <span class="keyword">ANY</span></span><br><span class="line">WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS <span class="keyword">FOR</span> A</span><br><span class="line">PARTICULAR PURPOSE.  See the GNU General <span class="keyword">Public</span> License <span class="keyword">for</span> more details.</span><br><span class="line">使用<span class="regexp">/dev/</span>sdb</span><br><span class="line">(parted)mklabel gpt</span><br><span class="line">(parted)<span class="keyword">print</span></span><br><span class="line"><span class="regexp">/dev/</span>sdb的磁盘几何结构：<span class="number">0.000</span>-<span class="number">2048.000</span>兆字节</span><br><span class="line">磁盘标签类型：gpt</span><br><span class="line">Minor   起始点       终止点 文件系统   名称                 标志</span><br><span class="line">(parted)mkpart primary <span class="number">0</span> <span class="number">2048</span>  &lt;-----上面<span class="keyword">print</span>显示的数字</span><br><span class="line">(parted)<span class="keyword">print</span></span><br><span class="line"><span class="regexp">/dev/</span>sdb的磁盘几何结构：<span class="number">0.000</span>-<span class="number">2048.000</span>兆字节</span><br><span class="line">磁盘标签类型：gpt</span><br><span class="line">Minor   起始点       终止点 文件系统   名称                 标志</span><br><span class="line"><span class="number">1</span>          <span class="number">0.017</span>   <span class="number">2047.983</span></span><br><span class="line">(parted)quit</span><br></pre></td></tr></table></figure></p>
+<h2 id="mkfs命令-磁盘格式化"><a href="#mkfs命令-磁盘格式化" class="headerlink" title="mkfs命令-磁盘格式化"></a>mkfs命令-磁盘格式化</h2><p>mkfs(make file system)磁盘格式化命令，磁盘的格式化就是给磁盘分区指定文件系统<br><figure class="hljs highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs -t ext3 <span class="regexp">/dev/</span>hdc6</span><br></pre></td></tr></table></figure></p>
+<h2 id="fsck命令-磁盘检验"><a href="#fsck命令-磁盘检验" class="headerlink" title="fsck命令-磁盘检验"></a>fsck命令-磁盘检验</h2><p>fsck（file system check）用来检查和维护不一致的文件系统，若系统掉电或磁盘发生问题，可利用fsck命令对文件系统进行检查<br><figure class="hljs highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby">t : 给定档案系统的型式，若在 /etc/fstab 中已有定义或 kernel 本身已支援的则不需加上此参数</span></span><br><span class="line"><span class="ruby">-s : 依序一个一个地执行 fsck 的指令来检查</span></span><br><span class="line"><span class="ruby">-A : 对/etc/fstab 中所有列出来的 分区（partition）做检查</span></span><br><span class="line"><span class="ruby">-C : 显示完整的检查进度</span></span><br><span class="line"><span class="ruby">-d : 打印出 e2fsck 的 debug 结果</span></span><br><span class="line"><span class="ruby">-p : 同时有 -A 条件时，同时有多个 fsck 的检查一起执行</span></span><br><span class="line"><span class="ruby">-R : 同时有 -A 条件时，省略 / 不检查</span></span><br><span class="line"><span class="ruby">-V : 详细显示模式</span></span><br><span class="line"><span class="ruby">-a : 如果检查有错则自动修复</span></span><br><span class="line"><span class="ruby">-r : 如果检查有错则由使用者回答是否修复</span></span><br><span class="line"><span class="ruby">-y : 选项指定检测每个文件是自动输入yes，在不确定那些是不正常的时候，可以执行 <span class="comment"># fsck -y 全部检查修复。</span></span></span><br></pre></td></tr></table></figure></p>
+<p>强制检测 /dev/hdc6 分区:<br><figure class="hljs highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]# fsck -C -f -t ext3 /dev/hdc6 </span><br><span class="line">fsck 1.39 (29-May-2006)</span><br><span class="line">e2fsck 1.39 (29-May-2006)</span><br><span class="line">Pass 1: Checking inodes, blocks, <span class="keyword">and</span> sizes</span><br><span class="line">Pass 2: Checking directory structure</span><br><span class="line">Pass 3: Checking directory connectivity</span><br><span class="line">Pass 4: Checking reference counts</span><br><span class="line">Pass 5: Checking<span class="built_in"> group </span>summary information</span><br><span class="line">vbird_logical: 11/251968 files (9.1% non-contiguous), 36926/1004046 blocks</span><br><span class="line">如果没有加上 -f 的选项，则由于这个文件系统不曾出现问题，检查的经过非常快速！若加上 -f 强制检查，才会一项一项的显示过程。</span><br></pre></td></tr></table></figure></p>
+<h2 id="mount-挂载磁盘"><a href="#mount-挂载磁盘" class="headerlink" title="mount-挂载磁盘"></a>mount-挂载磁盘</h2><p>Linux 的磁盘挂载使用 mount 命令，卸载使用 umount 命令，磁盘分区后即可将分区挂载到文件系统中<br><figure class="hljs highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby">V：显示程序版本；</span></span><br><span class="line"><span class="ruby">-l：显示已加载的文件系统列表；</span></span><br><span class="line"><span class="ruby">-h：显示帮助信息并退出；</span></span><br><span class="line"><span class="ruby">-v：冗长模式，输出指令执行的详细信息；</span></span><br><span class="line"><span class="ruby">-n：加载没有写入文件“/etc/mtab”中的文件系统；</span></span><br><span class="line"><span class="ruby">-r：将文件系统加载为只读模式；</span></span><br><span class="line"><span class="ruby">-a：加载文件“/etc/fstab”中描述的所有文件系统</span></span><br><span class="line"><span class="ruby"></span></span><br><span class="line"><span class="ruby">mount /dev/sdb1 /data</span></span><br><span class="line"><span class="ruby">umount /dev/sdb1</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="新加磁盘"><a href="#新加磁盘" class="headerlink" title="新加磁盘"></a>新加磁盘</h2><p>在生产环境中，经常遇到磁盘空间不足的情况，这时候就需要额外添加一块磁盘以增加可使用的磁盘空间，在硬件机器上插入磁盘后，可以用以下命令查看到新加的磁盘<br><figure class="hljs highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">sudo fdisk -l</span></span><br></pre></td></tr></table></figure></p>
+<p>接下来就需要对新加的磁盘进行分区<br><figure class="hljs highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo fdisk <span class="regexp">/dev/</span>sdb</span><br></pre></td></tr></table></figure></p>
+<p>/dev/sdb为新加的磁盘设备，此命令可以进入交互模式   </p>
+<p>之后就可以通过fdisk -l查看到新建的分区/dev/sdb1,这时需要对新建的分区格式化，才能将该分区挂载到文件系统中<br><figure class="hljs highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs<span class="selector-class">.ext4</span> /dev/sdb1</span><br></pre></td></tr></table></figure></p>
+<p>挂载该分区到文件系统中<br><figure class="hljs highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">sudo</span> mount /dev/sdb1 /<span class="class"><span class="keyword">data</span></span></span><br></pre></td></tr></table></figure></p>
+<h2 id="分区格式"><a href="#分区格式" class="headerlink" title="分区格式"></a>分区格式</h2><p>一般硬盘的分区格式为dos,这种类型支持的分区大小最多为2T，对于大于2T的分区，需要转化为gpt格式，这里用parted程序将新加的磁盘转化为gpt格式<br>ubuntu 16.04默认安装了parted，其他没有默认安装的可以通过软件源安装，如centos系统<br><figure class="hljs highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum <span class="keyword">install</span> parted</span><br></pre></td></tr></table></figure></p>
+<p>执行以下命令可以进入parted交互模式<br><figure class="hljs highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo parted <span class="regexp">/dev/</span>sdb</span><br></pre></td></tr></table></figure></p>
+<p>退出parted后即可用fdisk对新加的磁盘进行分区和格式化操作</p>
+<h2 id="lsblk命令"><a href="#lsblk命令" class="headerlink" title="lsblk命令"></a>lsblk命令</h2><p>lsblk命令用于列出所有可用块设备的信息，而且还能显示他们之间的依赖关系，但是它不会列出RAM盘的信息。块设备有硬盘，闪存盘，cd-ROM等等。lsblk命令包含在util-linux-ng包中，现在该包改名为util-linux<br><figure class="hljs highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby">a, --all            显示所有设备。</span></span><br><span class="line"><span class="ruby">-b, --bytes          以bytes方式显示设备大小。</span></span><br><span class="line"><span class="ruby">-d, --nodeps         不显示 slaves 或 holders。</span></span><br><span class="line"><span class="ruby">-D, --discard        print discard capabilities。</span></span><br><span class="line"><span class="ruby">-e, --exclude &lt;list&gt; 排除设备 (<span class="symbol">default:</span> RAM disks)。</span></span><br><span class="line"><span class="ruby">-f, --fs             显示文件系统信息。</span></span><br><span class="line"><span class="ruby">-h, --help           显示帮助信息。</span></span><br><span class="line"><span class="ruby">-i, --ascii          use ascii characters only。</span></span><br><span class="line"><span class="ruby">-m, --perms          显示权限信息。</span></span><br><span class="line"><span class="ruby">-l, --list           使用列表格式显示。</span></span><br><span class="line"><span class="ruby">-n, --noheadings     不显示标题。</span></span><br><span class="line"><span class="ruby">-o, --output &lt;list&gt;  输出列。</span></span><br><span class="line"><span class="ruby">-P, --pairs          使用key=<span class="string">"value"</span>格式显示。</span></span><br><span class="line"><span class="ruby">-r, --raw            使用原始格式显示。</span></span><br><span class="line"><span class="ruby">-t, --topology       显示拓扑结构信息。</span></span><br></pre></td></tr></table></figure></p>
+<figure class="hljs highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">lsblk</span><br><span class="line"></span><br><span class="line">NAME   MAJ:MIN rm   SIZE RO type mountpoint</span><br><span class="line">sda      8:0   <span class="number"> 0 </span>232.9G <span class="number"> 0 </span>disk </span><br><span class="line">├─sda1   8:1   <span class="number"> 0 </span> 46.6G <span class="number"> 0 </span>part /</span><br><span class="line">├─sda2   8:2   <span class="number"> 0 </span>    1K <span class="number"> 0 </span>part </span><br><span class="line">├─sda5   8:5   <span class="number"> 0 </span>  190M <span class="number"> 0 </span>part /boot</span><br><span class="line">├─sda6   8:6   <span class="number"> 0 </span>  3.7G <span class="number"> 0 </span>part [SWAP]</span><br><span class="line">├─sda7   8:7   <span class="number"> 0 </span> 93.1G <span class="number"> 0 </span>part /data</span><br><span class="line">└─sda8   8:8   <span class="number"> 0 </span> 89.2G <span class="number"> 0 </span>part /personal</span><br><span class="line">sr0     11:0   <span class="number"> 1 </span> 1024M <span class="number"> 0 </span>rom</span><br></pre></td></tr></table></figure>
+<p>7个栏目名称如下：<br>NAME：这是块设备名。<br>MAJ:MIN：本栏显示主要和次要设备号。<br>RM：本栏显示设备是否可移动设备。注意，在本例中设备sdb和sr0的RM值等于1，这说明他们是可移动设备。<br>SIZE：本栏列出设备的容量大小信息。例如298.1G表明该设备大小为298.1GB，而1K表明该设备大小为1KB。<br>RO：该项表明设备是否为只读。在本案例中，所有设备的RO值为0，表明他们不是只读的。<br>TYPE：本栏显示块设备是否是磁盘或磁盘上的一个分区。在本例中，sda和sdb是磁盘，而sr0是只读存储（rom）。<br>MOUNTPOINT：本栏指出设备挂载的挂载点。  </p>
+<h2 id="mkswap命令"><a href="#mkswap命令" class="headerlink" title="mkswap命令"></a>mkswap命令</h2><ol>
+<li><p>查看</p>
+<figure class="hljs highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">命令free -m可以查看系统swap space大小</span><br><span class="line"></span><br><span class="line">查看当前的swap空间(<span class="keyword">file</span>(s)/<span class="keyword">partition</span>(s))：</span><br><span class="line">swapon -s</span><br><span class="line">等价于</span><br><span class="line">cat /<span class="keyword">proc</span>/swaps</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加交换空间</p>
+</li>
+</ol>
+<p>添加一个交换分区或添加一个交换文件。推荐你添加一个交换分区；不过，若你没有多少空闲空间可用，则添加交换文件。<br><figure class="hljs highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">添加一个交换分区，步骤如下：</span><br><span class="line">使用fdisk来创建交换分区（假设 <span class="string">/dev/sdb2</span> 是创建的交换分区），使用 mkswap 命令来设置交换分区：</span><br><span class="line">mkswap <span class="string">/dev/sdb2</span></span><br><span class="line">启用交换分区：</span><br><span class="line">swapon <span class="string">/dev/sdb2</span></span><br><span class="line">写入<span class="string">/etc/fstab</span>，以便在引导时启用：</span><br><span class="line"><span class="string">/dev/sdb2</span> swap swap defaults 0 0</span><br><span class="line"></span><br><span class="line">添加一个交换文件，步骤如下：</span><br><span class="line">创建大小为512M的交换文件：</span><br><span class="line">dd <span class="keyword">if</span>=<span class="string">/dev/zero</span> of=<span class="string">/swapfile1</span> bs=1024 count=524288</span><br><span class="line">使用mkswap命令来设置交换文件：</span><br><span class="line">mkswap <span class="string">/swapfile1</span></span><br><span class="line">启用交换分区：</span><br><span class="line">swapon <span class="string">/swapfile1</span></span><br><span class="line">写入<span class="string">/etc/fstab</span>，以便在引导时启用：</span><br><span class="line"><span class="string">/swapfile1</span> swap swap defaults 0 0</span><br><span class="line">新添了交换分区并启用它之后，请查看cat <span class="string">/proc/swaps</span>或free命令的输出来确保交换分区已被启用了</span><br></pre></td></tr></table></figure></p>
+<ol start="3">
+<li>删除/禁用交换空间：<figure class="hljs highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">swapoff <span class="regexp">/dev/</span>sdb2</span><br><span class="line">从<span class="regexp">/etc/</span>fstab中删除项目，使用fdisk或yast工具删除分区</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        
+        
+        
+        
+        <a class="post-tag button" href="/tags/磁盘管理/" style="background: #fc6423;" rel="tag"><i class="fas fa-tags"></i>磁盘管理</a>
+        
+      </div>
+      
+    </footer>
+  </article>
+  
+  
+  <div class="post-nav">
+    <div class="post-nav-next post-nav-item">
+      
+      <a href="/2017/10/18/CS/Linux/vim/" rel="next" title="Vim"><i class="fas fa-angle-left"></i><span class="nav-title">Vim</span></a>
+      
+    </div>
+    <div class="post-nav-prev post-nav-item">
+      
+      <a href="/2018/01/18/CS/Linux/shell/" rel="prev" title="Shell"><span class="nav-title">Shell</span><i class="fas fa-angle-right"></i></a>
+      
+    </div>
+  </div>
+  
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar" style="background: url(/images/sidebar_background.png);">
+  
+  <div class="search">
+    <div class="form-group">
+      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="Search" class="form-control"/>
+    </div>
+  </div>
+  <div class="search-result-box" id="search-result"></div>
+  
+  
+<div class="info sidebar-item" id="info">
+  
+  <img class="author-avatar" src="/images/github.jpg" alt="LiZhiqiang">
+  
+  <h1 class="author-name">LiZhiqiang</h1>
+  <h2 class="author-description"> Computer enthusiasts</h2>
+  <div class="site-count">
+    
+    <div class="archives-count">
+      <div class="site-count-title">Archives</div>
+      <div><a href="/archives/">20</a></div>
+    </div>
+    
+    
+    
+    <span class="site-count-divider divider">|</span>
+    
+    <div class="categories-count">
+      <div class="site-count-title">Categories</div>
+      <div><a href="/categories/">16</a></div>
+    </div>
+    
+    
+    
+    <span class="site-count-divider divider">|</span>
+    
+    <div class="tags-count">
+      <div class="site-count-title">Tags</div>
+      <div><a href="/tags/">20</a></div>
+    </div>
+    
+  </div>
+  
+  <div class="rss">
+    <a class="rss-link button sidebar-item" href="/atom.xml"><i class="fas fa-rss"></i>RSS</a>
+  </div>
+  
+</div>
+
+
+  <div class="sidebar-sticky">
+    
+    
+
+
+
+
+<hr>
+<div class="post-toc sidebar-item" id="toc-div">
+  <div><i class="fas fa-list-ol"></i>Table of Contents</div>
+  <div class="post-toc-content"><ol class="list-group toc"><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#df命令"><span class="toc-text">df命令</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#du命令"><span class="toc-text">du命令</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#fdisk命令"><span class="toc-text">fdisk命令</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#parted命令"><span class="toc-text">parted命令</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#mkfs命令-磁盘格式化"><span class="toc-text">mkfs命令-磁盘格式化</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#fsck命令-磁盘检验"><span class="toc-text">fsck命令-磁盘检验</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#mount-挂载磁盘"><span class="toc-text">mount-挂载磁盘</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#新加磁盘"><span class="toc-text">新加磁盘</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#分区格式"><span class="toc-text">分区格式</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#lsblk命令"><span class="toc-text">lsblk命令</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#mkswap命令"><span class="toc-text">mkswap命令</span></a></li></ol></div>
+</div>
+
+
+
+    
+    
+    
+<hr>
+<div class="social-link sidebar-item">
+  <div><i class="far fa-address-card"></i>Social Links</p></div>
+  <ul>
+    
+    <li><i class="fas fa-envelope"></i><a href="mailto:li.zq@foxmail.com" target="_blank">li.zq@foxmail.com</a></li>
+    
+    <li><i class="fab fa-github"></i><a href="https://github.com/Xuntian" target="_blank">Xuntian</a></li>
+    
+  </ul>
+</div>
+
+
+    
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <a id="back-to-top"><i class="fas fa-angle-double-up"></i></a>
+    </div>
+    <div class="footer-container">
+      <div class="footer-center">
+        <div class="copyright">
+          <span class="author">LiZhiqiang</span><span class="year"><i class="far fa-copyright"></i>2016 - 2019</span>
+        </div>
+        
+        <div class="custom-info">
+          
+          Powered by Hexo and ARIA
+          
+        </div>
+      </div>
+      <!--
+      <div class="footer-right">
+        
+        <div class="custom-info">
+          
+          Powered by Hexo and ARIA
+          
+        </div>
+        
+        <div class="powered-by">
+          Proudly Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> | Theme is <a href="https://github.com/AlynxZhou/hexo-theme-aria/" target="_blank">ARIA</a>
+        </div>
+      </div>
+      -->
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>

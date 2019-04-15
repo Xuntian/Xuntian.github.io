@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    
+    <meta name="keywords" content="Blog, Computer Science, Hexo">
+    
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="Xuntian" type="application/atom+xml" />
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    
+    
+<link rel="stylesheet" type="text/css" href="/css/page.css">
+<link rel="stylesheet" type="text/css" href="/css/post.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/solarized-dark.css">
+    <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script defer type="text/javascript" src="/js/util.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
+    <script defer type="text/javascript" src="/js/lightgallery.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-hash.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-pager.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-zoom.min.js"></script>
+    
+    
+    <script defer type="text/javascript" src="/js/search.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+      var searchPath = "search.xml";
+      if (searchPath.length === 0) {
+        searchPath = "search.xml";
+      }
+      var path = "/" + searchPath;
+      searchFunc(path, "search-input", "search-result");
+    });
+    </script>
+    
+    
+    <script defer type="text/javascript" src="/js/index.js"></script>
+    
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <title>Cmake | Xuntian - Lizhiqiang's blog</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage" lang="en"  data-spy="scroll" data-target=".list-group">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <h1 class="title"><a href="/">Xuntian</a></h1>
+        <h2 class="subtitle">Lizhiqiang's blog</h2>
+      </div>
+      
+      <div class="logo">
+        <img src="/images/logo.png" alt="logo">
+      </div>
+      
+    </div>
+    
+<nav id="nav" class="nav">
+  <a id="nav-toggle" class="nav-toggle"><i class="fas fa-bars"></i></a>
+  <ul id="menu">
+    
+    <li><a href="/">Home</a></li>
+    
+    <li><a href="/archives/">Archives</a></li>
+    
+    <li><a href="/categories/">Categories</a></li>
+    
+    <li><a href="/tags/">Tags</a></li>
+    
+    <li><a href="/about/">About</a></li>
+    
+  </ul>
+</nav>
+
+
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="post" class="post">
+  
+  <article class="post-article card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="http://www.lizq.top/2018/04/11/CS/C/cmake/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+       <meta itemprop="name" content="LiZhiqiang">
+       <meta itemprop="description" content="Computer enthusiasts">
+       <meta itemprop="image" content="/images/github.jpg">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+       <meta itemprop="name" content="Xuntian">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">Cmake</h1>
+      <div class="post-meta">
+        
+        <span class="post-date">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2018-04-11T00:00:00+08:00">2018-04-11</time></span>
+          <!--
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2018-04-11T00:00:00+08:00">2018-04-11 00:00:00</time></span>
+          -->
+        </span>
+        
+        
+        
+        <span class="post-meta-divider divider">|</span>
+        
+        <span class="post-categories">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/c语言/" itemprop="url" rel="index"><span itemprop="name">c语言</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/c语言/cmake/" itemprop="url" rel="index"><span itemprop="name">cmake</span></a></span>
+        </span>
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      <h2 id="简单的应用实例"><a href="#简单的应用实例" class="headerlink" title="简单的应用实例"></a>简单的应用实例</h2><p>main.c文件内容<br><figure class="hljs highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Hello World!\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>新建CMakeList.txt文件<br><figure class="hljs highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PROJECT (HELLO)</span><br><span class="line"><span class="function"><span class="title">SET</span><span class="params">(SRC_LIST main.c)</span></span></span><br><span class="line"><span class="function"><span class="title">MESSAGE</span><span class="params">(STATUS <span class="string">"This is BINARY dir "</span> $&#123;HELLO_BINARY_DIR&#125;)</span></span></span><br><span class="line"><span class="function"><span class="title">MESSAGE</span><span class="params">(STATUS <span class="string">"This is SOURCE dir "</span> $&#123;HELLO_SOURCE_DIR&#125;)</span></span></span><br><span class="line"><span class="function"><span class="title">ADD_EXECUTABLE</span><span class="params">(hello $&#123;SRC_LIST&#125;)</span></span></span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>开始构建 cmake .<br><figure class="hljs highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">所有的文件创建完成后，t1 目录中应该存在main.c和 CMakeLists.txt 两个文件</span><br><span class="line">接下来我们来构建这个工程，在这个目录运行：</span><br><span class="line">cmake . (注意命令后面的点号，代表本目录)。</span><br><span class="line">输出大概是这个样子：</span><br><span class="line">-<span class="ruby">- Check <span class="keyword">for</span> working C <span class="symbol">compiler:</span> /usr/bin/gcc</span></span><br><span class="line"><span class="ruby">-- Check <span class="keyword">for</span> working C <span class="symbol">compiler:</span> /usr/bin/gcc -- works</span></span><br><span class="line"><span class="ruby">-- Check size of void*</span></span><br><span class="line"><span class="ruby">-- Check size of void* - done</span></span><br><span class="line"><span class="ruby">-- Check <span class="keyword">for</span> working CXX <span class="symbol">compiler:</span> /usr/bin/c++</span></span><br><span class="line"><span class="ruby">-- Check <span class="keyword">for</span> working CXX <span class="symbol">compiler:</span> /usr/bin/c++ -- works</span></span><br><span class="line"><span class="ruby">-- This is BINARY dir /backup/cmake/t1</span></span><br><span class="line"><span class="ruby">-- This is SOURCE dir /backup/cmake/t1</span></span><br><span class="line"><span class="ruby">-- Configuring done</span></span><br><span class="line"><span class="ruby">-- Generating done</span></span><br><span class="line"><span class="ruby">-- Build files have been written <span class="symbol">to:</span> /backup/cmake/t1</span></span><br><span class="line"><span class="ruby">再让我们看一下目录中的内容：</span></span><br><span class="line"><span class="ruby">你会发现，系统自动生成了：</span></span><br><span class="line"><span class="ruby">CMakeFiles, CMakeCache.txt, cmake_install.cmake等文件，并且生成了Makefile.</span></span><br><span class="line"><span class="ruby">现在不需要理会这些文件的作用，以后你也可以不去理会。最关键的是，它自动生成了Makefile.</span></span><br><span class="line"><span class="ruby"></span></span><br><span class="line"><span class="ruby">然后进行工程的实际构建，在这个目录输入 make命令，大概会得到如下的彩色输出：</span></span><br><span class="line"><span class="ruby">Scanning dependencies of target hello</span></span><br><span class="line"><span class="ruby">[<span class="number">100</span>%] Building C object CMakeFiles/hello.dir/main.o</span></span><br><span class="line"><span class="ruby">Linking C executable hello</span></span><br><span class="line"><span class="ruby">[<span class="number">100</span>%] Built target hello</span></span><br><span class="line"><span class="ruby">如果你需要看到make构建的详细过程，可以使用make VERBOSE=<span class="number">1</span> 或者VERBOSE=<span class="number">1</span></span></span><br><span class="line"><span class="ruby">make命令来进行构建。</span></span><br><span class="line"><span class="ruby">这时候，我们需要的目标文件hello 已经构建完成，位于当前目录，尝试运行一下：</span></span><br><span class="line"><span class="ruby">./hello</span></span><br><span class="line"><span class="ruby">得到输出：</span></span><br><span class="line"><span class="ruby">Hello World from Main</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="对实例的解释"><a href="#对实例的解释" class="headerlink" title="对实例的解释"></a>对实例的解释</h2><p>PROJECT指令的语法是<br><code>PROJECT(projectname [CXX] [C] [Java])</code><br>SET指令的语法是<br><code>SET(VAR [VALUE] [CACHE TYPE DOCSTRING [FORCE]])</code><br>现阶段，你只需要了解SET指令可以用来显式的定义变量即可。<br>比如我们用到的是SET(SRC_LIST main.c)，如果有多个源文件，也可以定义成：<br><code>SET(SRC_LIST main.c t1.c t2.c)</code></p>
+
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        
+        
+        
+        
+        <a class="post-tag button" href="/tags/cmake/" style="background: #fc6423;" rel="tag"><i class="fas fa-tags"></i>cmake</a>
+        
+      </div>
+      
+    </footer>
+  </article>
+  
+  
+  <div class="post-nav">
+    <div class="post-nav-next post-nav-item">
+      
+      <a href="/2018/03/31/CS/C/gcc/" rel="next" title="Gcc"><i class="fas fa-angle-left"></i><span class="nav-title">Gcc</span></a>
+      
+    </div>
+    <div class="post-nav-prev post-nav-item">
+      
+      <a href="/2018/07/11/EM/投资/超额收益/" rel="prev" title="超额收益"><span class="nav-title">超额收益</span><i class="fas fa-angle-right"></i></a>
+      
+    </div>
+  </div>
+  
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar" style="background: url(/images/sidebar_background.png);">
+  
+  <div class="search">
+    <div class="form-group">
+      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="Search" class="form-control"/>
+    </div>
+  </div>
+  <div class="search-result-box" id="search-result"></div>
+  
+  
+<div class="info sidebar-item" id="info">
+  
+  <img class="author-avatar" src="/images/github.jpg" alt="LiZhiqiang">
+  
+  <h1 class="author-name">LiZhiqiang</h1>
+  <h2 class="author-description"> Computer enthusiasts</h2>
+  <div class="site-count">
+    
+    <div class="archives-count">
+      <div class="site-count-title">Archives</div>
+      <div><a href="/archives/">20</a></div>
+    </div>
+    
+    
+    
+    <span class="site-count-divider divider">|</span>
+    
+    <div class="categories-count">
+      <div class="site-count-title">Categories</div>
+      <div><a href="/categories/">16</a></div>
+    </div>
+    
+    
+    
+    <span class="site-count-divider divider">|</span>
+    
+    <div class="tags-count">
+      <div class="site-count-title">Tags</div>
+      <div><a href="/tags/">20</a></div>
+    </div>
+    
+  </div>
+  
+  <div class="rss">
+    <a class="rss-link button sidebar-item" href="/atom.xml"><i class="fas fa-rss"></i>RSS</a>
+  </div>
+  
+</div>
+
+
+  <div class="sidebar-sticky">
+    
+    
+
+
+
+
+<hr>
+<div class="post-toc sidebar-item" id="toc-div">
+  <div><i class="fas fa-list-ol"></i>Table of Contents</div>
+  <div class="post-toc-content"><ol class="list-group toc"><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#简单的应用实例"><span class="toc-text">简单的应用实例</span></a></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#对实例的解释"><span class="toc-text">对实例的解释</span></a></li></ol></div>
+</div>
+
+
+
+    
+    
+    
+<hr>
+<div class="social-link sidebar-item">
+  <div><i class="far fa-address-card"></i>Social Links</p></div>
+  <ul>
+    
+    <li><i class="fas fa-envelope"></i><a href="mailto:li.zq@foxmail.com" target="_blank">li.zq@foxmail.com</a></li>
+    
+    <li><i class="fab fa-github"></i><a href="https://github.com/Xuntian" target="_blank">Xuntian</a></li>
+    
+  </ul>
+</div>
+
+
+    
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <a id="back-to-top"><i class="fas fa-angle-double-up"></i></a>
+    </div>
+    <div class="footer-container">
+      <div class="footer-center">
+        <div class="copyright">
+          <span class="author">LiZhiqiang</span><span class="year"><i class="far fa-copyright"></i>2016 - 2019</span>
+        </div>
+        
+        <div class="custom-info">
+          
+          Powered by Hexo and ARIA
+          
+        </div>
+      </div>
+      <!--
+      <div class="footer-right">
+        
+        <div class="custom-info">
+          
+          Powered by Hexo and ARIA
+          
+        </div>
+        
+        <div class="powered-by">
+          Proudly Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> | Theme is <a href="https://github.com/AlynxZhou/hexo-theme-aria/" target="_blank">ARIA</a>
+        </div>
+      </div>
+      -->
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>

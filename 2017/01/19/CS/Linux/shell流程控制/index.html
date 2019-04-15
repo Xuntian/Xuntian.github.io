@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#33363b">
+    <meta name="msapplication-TileColor" content="#33363b">
+    
+    
+    
+    <meta name="keywords" content="Blog, Computer Science, Hexo">
+    
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    
+    
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    
+    
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#33363b">
+    
+    
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    
+    
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    
+    
+    <link rel="alternate" href="/atom.xml" title="Xuntian" type="application/atom+xml" />
+    
+    
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
+    
+    
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    
+    
+<link rel="stylesheet" type="text/css" href="/css/page.css">
+<link rel="stylesheet" type="text/css" href="/css/post.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="/css/solarized-dark.css">
+    <link rel="stylesheet" type="text/css" href="/css/lightgallery.min.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script defer type="text/javascript" src="/js/util.js"></script>
+    <script defer type="text/javascript" src="/js/scrollspy.js"></script>
+    <script defer type="text/javascript" src="/js/fontawesome-all.min.js"></script>
+    <script defer type="text/javascript" src="/js/lightgallery.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-fullscreen.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-hash.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-pager.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-thumbnail.min.js"></script>
+    <script defer type="text/javascript" src="/js/lg-zoom.min.js"></script>
+    
+    
+    <script defer type="text/javascript" src="/js/search.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+      var searchPath = "search.xml";
+      if (searchPath.length === 0) {
+        searchPath = "search.xml";
+      }
+      var path = "/" + searchPath;
+      searchFunc(path, "search-input", "search-result");
+    });
+    </script>
+    
+    
+    <script defer type="text/javascript" src="/js/index.js"></script>
+    
+    <script defer type="text/javascript" src="/js/custom.js"></script>
+    <title>Shell流程控制 | Xuntian - Lizhiqiang's blog</title>
+  </head>
+  <body itemscope itemtype="http://schema.org/WebPage" lang="en"  data-spy="scroll" data-target=".list-group">
+    
+<header id="header" class="header" style="background: #33363b;">
+  <div class="container">
+    <div class="header-container">
+      <div class="header-title">
+        <h1 class="title"><a href="/">Xuntian</a></h1>
+        <h2 class="subtitle">Lizhiqiang's blog</h2>
+      </div>
+      
+      <div class="logo">
+        <img src="/images/logo.png" alt="logo">
+      </div>
+      
+    </div>
+    
+<nav id="nav" class="nav">
+  <a id="nav-toggle" class="nav-toggle"><i class="fas fa-bars"></i></a>
+  <ul id="menu">
+    
+    <li><a href="/">Home</a></li>
+    
+    <li><a href="/archives/">Archives</a></li>
+    
+    <li><a href="/categories/">Categories</a></li>
+    
+    <li><a href="/tags/">Tags</a></li>
+    
+    <li><a href="/about/">About</a></li>
+    
+  </ul>
+</nav>
+
+
+  </div>
+</header>
+
+
+    <main id="main" class="main">
+      <div class="container">
+        <div class="main-container">
+          <div class="content">
+            
+<div id="post" class="post">
+  
+  <article class="post-article card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="http://www.lizq.top/2017/01/19/CS/Linux/shell流程控制/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+       <meta itemprop="name" content="LiZhiqiang">
+       <meta itemprop="description" content="Computer enthusiasts">
+       <meta itemprop="image" content="/images/github.jpg">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+       <meta itemprop="name" content="Xuntian">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">Shell流程控制</h1>
+      <div class="post-meta">
+        
+        <span class="post-date">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2017-01-19T00:00:00+08:00">2017-01-19</time></span>
+          <!--
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2017-01-19T00:00:00+08:00">2017-01-19 00:00:00</time></span>
+          -->
+        </span>
+        
+        
+        
+        <span class="post-meta-divider divider">|</span>
+        
+        <span class="post-categories">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/linux/shell/" itemprop="url" rel="index"><span itemprop="name">shell</span></a></span>
+        </span>
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      <h3 id="if-else"><a href="#if-else" class="headerlink" title="if-else"></a>if-else</h3><figure class="hljs highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">a=10</span><br><span class="line">b=20</span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$a</span> == <span class="variable">$b</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">   <span class="built_in">echo</span> <span class="string">"a 等于 b"</span></span><br><span class="line"><span class="keyword">elif</span> [ <span class="variable">$a</span> -gt <span class="variable">$b</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">   <span class="built_in">echo</span> <span class="string">"a 大于 b"</span></span><br><span class="line"><span class="keyword">elif</span> [ <span class="variable">$a</span> -lt <span class="variable">$b</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">   <span class="built_in">echo</span> <span class="string">"a 小于 b"</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">   <span class="built_in">echo</span> <span class="string">"没有符合的条件"</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="for"><a href="#for" class="headerlink" title="for"></a>for</h3><figure class="hljs highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> loop <span class="keyword">in</span> 1 2 3 4 5</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"The value is: <span class="variable">$loop</span>"</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<figure class="hljs highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="built_in">str</span> <span class="built_in">in</span> <span class="string">'This is a string'</span></span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> $<span class="built_in">str</span></span><br><span class="line">don</span><br></pre></td></tr></table></figure>
+<figure class="hljs highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>((i=1;i&lt;=10;i++))</span><br><span class="line"><span class="keyword">do</span> </span><br><span class="line">    <span class="built_in">echo</span> $(expr <span class="variable">$i</span> \* 4)</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<h3 id="while"><a href="#while" class="headerlink" title="while"></a>while</h3><figure class="hljs highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">int=1</span><br><span class="line"><span class="keyword">while</span>(( <span class="variable">$int</span>&lt;=5 ))</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="variable">$int</span></span><br><span class="line">    <span class="built_in">let</span> <span class="string">"int++"</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<h3 id="until"><a href="#until" class="headerlink" title="until"></a>until</h3><figure class="hljs highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">until</span> condition</span><br><span class="line"><span class="built_in">do</span></span><br><span class="line">    <span class="keyword">command</span></span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h3 id="case"><a href="#case" class="headerlink" title="case"></a>case</h3><figure class="hljs highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">'输入 1 到 4 之间的数字:'</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">'你输入的数字为:'</span></span><br><span class="line"><span class="built_in">read</span> aNum</span><br><span class="line"><span class="keyword">case</span> <span class="variable">$aNum</span> <span class="keyword">in</span></span><br><span class="line">    1)  <span class="built_in">echo</span> <span class="string">'你选择了 1'</span></span><br><span class="line">    ;;</span><br><span class="line">    2)  <span class="built_in">echo</span> <span class="string">'你选择了 2'</span></span><br><span class="line">    ;;</span><br><span class="line">    3)  <span class="built_in">echo</span> <span class="string">'你选择了 3'</span></span><br><span class="line">    ;;</span><br><span class="line">    4)  <span class="built_in">echo</span> <span class="string">'你选择了 4'</span></span><br><span class="line">    ;;</span><br><span class="line">    *)  <span class="built_in">echo</span> <span class="string">'你没有输入 1 到 4 之间的数字'</span></span><br><span class="line">    ;;</span><br><span class="line"><span class="keyword">esac</span></span><br></pre></td></tr></table></figure>
+<h3 id="跳出循环"><a href="#跳出循环" class="headerlink" title="跳出循环"></a>跳出循环</h3><ul>
+<li><p>break</p>
+<figure class="hljs highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="keyword">while</span> :</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> -n <span class="string">"输入 1 到 5 之间的数字:"</span></span><br><span class="line">    <span class="built_in">read</span> aNum</span><br><span class="line">    <span class="keyword">case</span> <span class="variable">$aNum</span> <span class="keyword">in</span></span><br><span class="line">        1|2|3|4|5) <span class="built_in">echo</span> <span class="string">"你输入的数字为 <span class="variable">$aNum</span>!"</span></span><br><span class="line">        ;;</span><br><span class="line">        *) <span class="built_in">echo</span> <span class="string">"你输入的数字不是 1 到 5 之间的! 游戏结束"</span></span><br><span class="line">            <span class="built_in">break</span></span><br><span class="line">        ;;</span><br><span class="line">    <span class="keyword">esac</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>continue</p>
+<figure class="hljs highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="keyword">while</span> :</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">    <span class="built_in">echo</span> -n <span class="string">"输入 1 到 5 之间的数字: "</span></span><br><span class="line">    <span class="built_in">read</span> aNum</span><br><span class="line">    <span class="keyword">case</span> <span class="variable">$aNum</span> <span class="keyword">in</span></span><br><span class="line">        1|2|3|4|5) <span class="built_in">echo</span> <span class="string">"你输入的数字为 <span class="variable">$aNum</span>!"</span></span><br><span class="line">        ;;</span><br><span class="line">        *) <span class="built_in">echo</span> <span class="string">"你输入的数字不是 1 到 5 之间的!"</span></span><br><span class="line">            <span class="built_in">continue</span></span><br><span class="line">            <span class="built_in">echo</span> <span class="string">"游戏结束"</span></span><br><span class="line">        ;;</span><br><span class="line">    <span class="keyword">esac</span></span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><figure class="hljs highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">funWithReturn</span></span>()&#123;</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"这个函数会对输入的两个数字进行相加运算..."</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"输入第一个数字: "</span></span><br><span class="line">    <span class="built_in">read</span> aNum</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"输入第二个数字: "</span></span><br><span class="line">    <span class="built_in">read</span> anotherNum</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"两个数字分别为 <span class="variable">$aNum</span> 和 <span class="variable">$anotherNum</span> !"</span></span><br><span class="line">    <span class="built_in">return</span> $((<span class="variable">$aNum</span>+<span class="variable">$anotherNum</span>))</span><br><span class="line">&#125;</span><br><span class="line">funWithReturn</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"输入的两个数字之和为 $? !"</span></span><br></pre></td></tr></table></figure>
+<h3 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数"></a>函数参数</h3><figure class="hljs highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment"># author:菜鸟教程</span></span><br><span class="line"><span class="comment"># url:www.runoob.com</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">funWithParam</span></span>()&#123;</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"第一个参数为 <span class="variable">$1</span> !"</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"第二个参数为 <span class="variable">$2</span> !"</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"第十个参数为 <span class="variable">$10</span> !"</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"第十个参数为 <span class="variable">$&#123;10&#125;</span> !"</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"第十一个参数为 <span class="variable">$&#123;11&#125;</span> !"</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"参数总数有 <span class="variable">$#</span> 个!"</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"作为一个字符串输出所有参数 $* !"</span></span><br><span class="line">&#125;</span><br><span class="line">funWithParam 1 2 3 4 5 6 7 8 9 34 73</span><br><span class="line"></span><br><span class="line"><span class="variable">$#</span>	传递到脚本的参数个数</span><br><span class="line">$*	以一个单字符串显示所有向脚本传递的参数</span><br><span class="line">$$	脚本运行的当前进程ID号</span><br><span class="line">$!	后台运行的最后一个进程的ID号</span><br><span class="line"><span class="variable">$@</span>	与$*相同，但是使用时加引号，并在引号中返回每个参数。</span><br><span class="line">$-	显示Shell使用的当前选项，与<span class="built_in">set</span>命令功能相同。</span><br><span class="line">$?	显示最后命令的退出状态。0表示没有错误，其他任何值表明有错误。</span><br></pre></td></tr></table></figure>
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        
+        
+        
+        
+        <a class="post-tag button" href="/tags/shell/" style="background: #fc6423;" rel="tag"><i class="fas fa-tags"></i>shell</a>
+        
+      </div>
+      
+    </footer>
+  </article>
+  
+  
+  <div class="post-nav">
+    <div class="post-nav-next post-nav-item">
+      
+      <a href="/2017/01/17/CS/Linux/网络管理/" rel="next" title="网络管理"><i class="fas fa-angle-left"></i><span class="nav-title">网络管理</span></a>
+      
+    </div>
+    <div class="post-nav-prev post-nav-item">
+      
+      <a href="/2017/06/01/CS/Git/gitlab_cluster/" rel="prev" title="Gitlab Cluster"><span class="nav-title">Gitlab Cluster</span><i class="fas fa-angle-right"></i></a>
+      
+    </div>
+  </div>
+  
+  
+</div>
+
+          </div>
+          
+          
+          
+<aside class="sidebar" id="sidebar" style="background: url(/images/sidebar_background.png);">
+  
+  <div class="search">
+    <div class="form-group">
+      <i class="fas fa-search"></i><input type="search" id="search-input" name="q" results="0" placeholder="Search" class="form-control"/>
+    </div>
+  </div>
+  <div class="search-result-box" id="search-result"></div>
+  
+  
+<div class="info sidebar-item" id="info">
+  
+  <img class="author-avatar" src="/images/github.jpg" alt="LiZhiqiang">
+  
+  <h1 class="author-name">LiZhiqiang</h1>
+  <h2 class="author-description"> Computer enthusiasts</h2>
+  <div class="site-count">
+    
+    <div class="archives-count">
+      <div class="site-count-title">Archives</div>
+      <div><a href="/archives/">20</a></div>
+    </div>
+    
+    
+    
+    <span class="site-count-divider divider">|</span>
+    
+    <div class="categories-count">
+      <div class="site-count-title">Categories</div>
+      <div><a href="/categories/">16</a></div>
+    </div>
+    
+    
+    
+    <span class="site-count-divider divider">|</span>
+    
+    <div class="tags-count">
+      <div class="site-count-title">Tags</div>
+      <div><a href="/tags/">20</a></div>
+    </div>
+    
+  </div>
+  
+  <div class="rss">
+    <a class="rss-link button sidebar-item" href="/atom.xml"><i class="fas fa-rss"></i>RSS</a>
+  </div>
+  
+</div>
+
+
+  <div class="sidebar-sticky">
+    
+    
+
+
+
+
+<hr>
+<div class="post-toc sidebar-item" id="toc-div">
+  <div><i class="fas fa-list-ol"></i>Table of Contents</div>
+  <div class="post-toc-content"><ol class="list-group toc"><li class="toc-item toc-level-3"><a class="list-group-item toc-link" href="#if-else"><span class="toc-text">if-else</span></a></li><li class="toc-item toc-level-3"><a class="list-group-item toc-link" href="#for"><span class="toc-text">for</span></a></li><li class="toc-item toc-level-3"><a class="list-group-item toc-link" href="#while"><span class="toc-text">while</span></a></li><li class="toc-item toc-level-3"><a class="list-group-item toc-link" href="#until"><span class="toc-text">until</span></a></li><li class="toc-item toc-level-3"><a class="list-group-item toc-link" href="#case"><span class="toc-text">case</span></a></li><li class="toc-item toc-level-3"><a class="list-group-item toc-link" href="#跳出循环"><span class="toc-text">跳出循环</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="list-group-item toc-link" href="#函数"><span class="toc-text">函数</span></a><ol class="list-group toc-child"><li class="toc-item toc-level-3"><a class="list-group-item toc-link" href="#基本用法"><span class="toc-text">基本用法</span></a></li><li class="toc-item toc-level-3"><a class="list-group-item toc-link" href="#函数参数"><span class="toc-text">函数参数</span></a></li></ol></div>
+</div>
+
+
+
+    
+    
+    
+<hr>
+<div class="social-link sidebar-item">
+  <div><i class="far fa-address-card"></i>Social Links</p></div>
+  <ul>
+    
+    <li><i class="fas fa-envelope"></i><a href="mailto:li.zq@foxmail.com" target="_blank">li.zq@foxmail.com</a></li>
+    
+    <li><i class="fab fa-github"></i><a href="https://github.com/Xuntian" target="_blank">Xuntian</a></li>
+    
+  </ul>
+</div>
+
+
+    
+    
+  </div>
+</aside>
+
+
+          
+        </div>
+      </div>
+    </main>
+    
+<footer id="footer" class="footer" style="background: #33363b;">
+  <div class="container">
+    <div class="back-to-top">
+      <a id="back-to-top"><i class="fas fa-angle-double-up"></i></a>
+    </div>
+    <div class="footer-container">
+      <div class="footer-center">
+        <div class="copyright">
+          <span class="author">LiZhiqiang</span><span class="year"><i class="far fa-copyright"></i>2016 - 2019</span>
+        </div>
+        
+        <div class="custom-info">
+          
+          Powered by Hexo and ARIA
+          
+        </div>
+      </div>
+      <!--
+      <div class="footer-right">
+        
+        <div class="custom-info">
+          
+          Powered by Hexo and ARIA
+          
+        </div>
+        
+        <div class="powered-by">
+          Proudly Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> | Theme is <a href="https://github.com/AlynxZhou/hexo-theme-aria/" target="_blank">ARIA</a>
+        </div>
+      </div>
+      -->
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>
