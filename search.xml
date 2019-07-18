@@ -3,6 +3,58 @@
   
     
     <entry>
+      <title>Gitaly</title>
+      <link href="/2019/07/18/CS/Git/gitaly/"/>
+      <url>/2019/07/18/CS/Git/gitaly/</url>
+      <content type="html"><![CDATA[<p>之前写了一篇关于gitlab集群搭建的文章，之前gitlab集群搭建起来之后性能很差，网页打开速度比较慢。从gitlab9.1版本后gitlab官方发布了gitaly项目，以解决gitlab-rails性能问题。</p><a id="more"></a><h2 id="gitaly简述"><a href="#gitaly简述" class="headerlink" title="gitaly简述"></a>gitaly简述</h2><p><img src="./p1.png" alt="传统架构示意图"></p><p>在之前，上层应用使用libgit2库调用底层的git，libgit2由c语言开发，gitlab-rails使用ruby的Rugged调用libgit2和git通信。而存储层则使用性能很差的nfs，网络文件系统增大了文件访问的开销，同时git也无法利用缓存增加平均访问速度。</p><p><img src="./p2.png" alt="gitaly架构示意图"></p><p>gitaly发布之后，gitlab-rails通过grpc访问gitaly和底层的git通信，规避了nfs的开销，可以对存储进行批量扩展，gitlab和gitaly的配置如下：</p><blockquote><p>gitlab</p></blockquote><figure class="hljs highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /etc/gitlab/gitlab.rb</span></span><br><span class="line">git_data_dirs(&#123;</span><br><span class="line">  <span class="string">'default'</span> =&gt; &#123; <span class="string">'gitaly_address'</span> =&gt; <span class="string">'tcp://gitaly.internal:8075'</span> &#125;,</span><br><span class="line">  <span class="string">'storage1'</span> =&gt; &#123; <span class="string">'gitaly_address'</span> =&gt; <span class="string">'tcp://gitaly.internal:8075'</span> &#125;,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">gitlab_rails[<span class="string">'gitaly_token'</span>] = <span class="string">'abc123secret'</span></span><br></pre></td></tr></table></figure><blockquote><p>gitaly</p></blockquote><figure class="hljs highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /etc/gitlab/gitlab.rb</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Avoid running unnecessary services on the Gitaly server</span></span><br><span class="line">postgresql[<span class="string">'enable'</span>] = <span class="keyword">false</span></span><br><span class="line">redis[<span class="string">'enable'</span>] = <span class="keyword">false</span></span><br><span class="line">nginx[<span class="string">'enable'</span>] = <span class="keyword">false</span></span><br><span class="line">prometheus[<span class="string">'enable'</span>] = <span class="keyword">false</span></span><br><span class="line">unicorn[<span class="string">'enable'</span>] = <span class="keyword">false</span></span><br><span class="line">sidekiq[<span class="string">'enable'</span>] = <span class="keyword">false</span></span><br><span class="line">gitlab_workhorse[<span class="string">'enable'</span>] = <span class="keyword">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Prevent database connections during 'gitlab-ctl reconfigure'</span></span><br><span class="line">gitlab_rails[<span class="string">'rake_cache_clear'</span>] = <span class="keyword">false</span></span><br><span class="line">gitlab_rails[<span class="string">'auto_migrate'</span>] = <span class="keyword">false</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Configure the gitlab-shell API callback URL. Without this, `git push` will</span></span><br><span class="line"><span class="comment"># fail. This can be your 'front door' GitLab URL or an internal load</span></span><br><span class="line"><span class="comment"># balancer.</span></span><br><span class="line"><span class="comment"># Don't forget to copy `/etc/gitlab/gitlab-secrets.json` from web server to Gitaly server.</span></span><br><span class="line">gitlab_rails[<span class="string">'internal_api_url'</span>] = <span class="string">'https://gitlab.example.com'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Make Gitaly accept connections on all network interfaces. You must use</span></span><br><span class="line"><span class="comment"># firewalls to restrict access to this address/port.</span></span><br><span class="line">gitaly[<span class="string">'listen_addr'</span>] = <span class="string">"0.0.0.0:8075"</span></span><br><span class="line">gitaly[<span class="string">'auth_token'</span>] = <span class="string">'abc123secret'</span></span><br><span class="line"></span><br><span class="line">gitaly[<span class="string">'storage'</span>] = [</span><br><span class="line">  &#123; <span class="string">'name'</span> =&gt; <span class="string">'default'</span>, <span class="string">'path'</span> =&gt; <span class="string">'/mnt/gitlab/default/repositories'</span> &#125;,</span><br><span class="line">  &#123; <span class="string">'name'</span> =&gt; <span class="string">'storage1'</span>, <span class="string">'path'</span> =&gt; <span class="string">'/mnt/gitlab/storage1/repositories'</span> &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>]]></content>
+      
+      <categories>
+          
+          <category> CS </category>
+          
+          <category> application </category>
+          
+          <category> gitlab </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> gitlab </tag>
+            
+            <tag> gitaly </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>Gitlab性能监控</title>
+      <link href="/2019/07/18/CS/Git/gitlab%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7/"/>
+      <url>/2019/07/18/CS/Git/gitlab%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7/</url>
+      <content type="html"><![CDATA[<p>Gitlab项目自带了非常完备的项目监控方案，在这里做一些简单的介绍。<br>官方文档里提到过下面几种监控</p><ul><li>Performance Bar</li><li>Monitoring GitLab with Prometheus</li><li>GitLab Performance Monitoring with Influxdb and Grafana</li></ul><a id="more"></a><h3 id="Performance-Bar"><a href="#Performance-Bar" class="headerlink" title="Performance Bar"></a>Performance Bar</h3><p>在Admin area中Settings &gt; Metrics and Profiling &gt; Profiling - Performance bar开启Performance Bar<br><img src="./performance_bar_configuration_settings.png" alt="performance_bar_configuration_settings"><br><img src="./performance_bar.png" alt="performance_bar"></p><p>这个监控功能很弱，只是用于在web页面端一次性显示本次访问的接口和时间开销</p><h3 id="Monitoring-GitLab-with-Prometheus"><a href="#Monitoring-GitLab-with-Prometheus" class="headerlink" title="Monitoring GitLab with Prometheus"></a>Monitoring GitLab with Prometheus</h3><p>gitlab自带好几个服务的心跳数据exporter，例如，node_exporter，redis_exporter和postgres_exporter；并且gitlab默认安装并开启了Prometheus服务，各类的exporters会将监控数据发送给Prometheus，所以只需要配置一下Prometheus就可以查看各类的监控数据了<br><figure class="hljs highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">prometheus['listen_address'] = ':<span class="number">9090</span>'</span><br><span class="line"><span class="meta"># or</span></span><br><span class="line">prometheus['listen_address'] = '0.0.0.0:<span class="number">9090</span>'</span><br></pre></td></tr></table></figure></p><p><img src="./prometheus.png" alt="prometheus"></p><h3 id="GitLab-Performance-Monitoring-with-Influxdb-and-Grafana"><a href="#GitLab-Performance-Monitoring-with-Influxdb-and-Grafana" class="headerlink" title="GitLab Performance Monitoring with Influxdb and Grafana"></a>GitLab Performance Monitoring with Influxdb and Grafana</h3><h4 id="配置influxdb"><a href="#配置influxdb" class="headerlink" title="配置influxdb"></a>配置influxdb</h4><figure class="hljs highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># influxdb配置文件</span></span><br><span class="line">[meta]</span><br><span class="line">  <span class="attr">dir</span> = <span class="string">"/var/lib/influxdb/meta"</span></span><br><span class="line"></span><br><span class="line">[data]</span><br><span class="line">  <span class="attr">dir</span> = <span class="string">"/var/lib/influxdb/data"</span></span><br><span class="line">  <span class="attr">engine</span> = <span class="string">"tsm1"</span></span><br><span class="line">  <span class="attr">wal-dir</span> = <span class="string">"/var/lib/influxdb/wal"</span></span><br><span class="line"></span><br><span class="line">[admin]</span><br><span class="line">  <span class="attr">enabled</span> = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">[http]</span><br><span class="line">  <span class="attr">enabled</span> = <span class="literal">true</span></span><br><span class="line">  <span class="attr">auth-enabled</span> = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">[[udp]]</span><br><span class="line">  <span class="attr">enabled</span> = <span class="literal">true</span></span><br><span class="line">  <span class="attr">bind-address</span> = <span class="string">":8089"</span></span><br><span class="line">  <span class="attr">database</span> = <span class="string">"gitlab"</span></span><br><span class="line">  <span class="attr">batch-size</span> = <span class="number">1000</span></span><br><span class="line">  <span class="attr">batch-pending</span> = <span class="number">5</span></span><br><span class="line">  <span class="attr">batch-timeout</span> = <span class="string">"1s"</span></span><br><span class="line">  <span class="attr">read-buffer</span> = <span class="number">209715200</span></span><br></pre></td></tr></table></figure><p>用docker启动influxdb，加入存放配置文件的volume，开放8089（udp，用于gitlab推送数据），8086（grafana访问数据），8083（admin panel)<br><figure class="hljs highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker run -dti --name influxdb -v influxdb<span class="selector-class">.conf</span>:/etc/influxdb/influxdb<span class="selector-class">.conf</span>:ro \</span><br><span class="line">    -<span class="selector-tag">p</span> <span class="number">8089</span>:<span class="number">8089</span>/udp -<span class="selector-tag">p</span> <span class="number">8086</span>:<span class="number">8086</span> -<span class="selector-tag">p</span> <span class="number">8083</span>:<span class="number">8083</span> \</span><br><span class="line">    -e INFLUXDB_ADMIN_ENABLED=true \</span><br><span class="line">    -e INFLUXDB_ADMIN_USER=&#123;user&#125; \</span><br><span class="line">    -e INFLUXDB_ADMIN_PASSWORD=&#123;passwd&#125; \</span><br><span class="line">    influxdb</span><br></pre></td></tr></table></figure></p><h4 id="配置gitlab"><a href="#配置gitlab" class="headerlink" title="配置gitlab"></a>配置gitlab</h4><p>在Admin area中的Settings &gt; Metrics做如下配置，influxDB host按自己的情况填写<br><img src="./metrics_gitlab_configuration_settings.png" alt="metrics_gitlab_configuration_settings"><br>然后gitlab-ctl restrat 重启gitlab的各项服务</p><h3 id="配置grafana"><a href="#配置grafana" class="headerlink" title="配置grafana"></a>配置grafana</h3><p>同样的，用docker启动grafana<br><figure class="hljs highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">run</span> -dti <span class="comment">--name grafana -p 3000:3000 -e GF_SECURITY_ADMIN_PASSWORD=&#123;passwd&#125; grafana/grafana</span></span><br></pre></td></tr></table></figure></p><p>启动后在grafana的web界面根据influxdb的配置添加influxdb的数据源，就可以在dashboard中看到gitlab的监控数据了<br><img src="./grafana.png" alt="grafana"></p>]]></content>
+      
+      <categories>
+          
+          <category> CS </category>
+          
+          <category> application </category>
+          
+          <category> gitlab </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> gitlab </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>金融的逻辑</title>
       <link href="/2019/06/24/EM/%E6%8A%95%E8%B5%84/%E9%87%91%E8%9E%8D%E7%9A%84%E9%80%BB%E8%BE%91/"/>
       <url>/2019/06/24/EM/%E6%8A%95%E8%B5%84/%E9%87%91%E8%9E%8D%E7%9A%84%E9%80%BB%E8%BE%91/</url>
@@ -228,6 +280,29 @@
     </entry>
     
     <entry>
+      <title>Apt</title>
+      <link href="/2018/01/18/CS/Linux/apt/"/>
+      <url>/2018/01/18/CS/Linux/apt/</url>
+      <content type="html"><![CDATA[<h2 id="apt-命令"><a href="#apt-命令" class="headerlink" title="apt 命令"></a>apt 命令</h2><figure class="hljs highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-<span class="builtin-name">get</span> update  更新源</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> install package 安装包</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> <span class="builtin-name">remove</span> package 删除包</span><br><span class="line">sudo apt-cache search package 搜索软件包</span><br><span class="line">sudo apt-cache show package  获取包的相关信息，如说明、大小、版本等</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> install package --reinstall  重新安装包</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> -f install  修复安装</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> <span class="builtin-name">remove</span> package --purge 删除包，包括配置文件等</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> build-dep package 安装相关的编译环境</span><br><span class="line">sudo apt-<span class="builtin-name">get</span><span class="built_in"> upgrade </span>更新已安装的包</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> dist-upgrade 升级系统</span><br><span class="line">sudo apt-cache depends package 了解使用该包依赖那些包</span><br><span class="line">sudo apt-cache rdepends package 查看该包被哪些包依赖</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> source package  下载该包的源代码</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> clean &amp;&amp; sudo apt-<span class="builtin-name">get</span> autoclean 清理无用的包</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> check 检查是否有损坏的依赖</span><br></pre></td></tr></table></figure><a id="more"></a>]]></content>
+      
+      <categories>
+          
+          <category> CS </category>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> apt </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>Shell</title>
       <link href="/2018/01/18/CS/Linux/shell/"/>
       <url>/2018/01/18/CS/Linux/shell/</url>
@@ -247,29 +322,6 @@
         <tags>
             
             <tag> shell </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    <entry>
-      <title>Apt</title>
-      <link href="/2018/01/18/CS/Linux/apt/"/>
-      <url>/2018/01/18/CS/Linux/apt/</url>
-      <content type="html"><![CDATA[<h2 id="apt-命令"><a href="#apt-命令" class="headerlink" title="apt 命令"></a>apt 命令</h2><figure class="hljs highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-<span class="builtin-name">get</span> update  更新源</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> install package 安装包</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> <span class="builtin-name">remove</span> package 删除包</span><br><span class="line">sudo apt-cache search package 搜索软件包</span><br><span class="line">sudo apt-cache show package  获取包的相关信息，如说明、大小、版本等</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> install package --reinstall  重新安装包</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> -f install  修复安装</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> <span class="builtin-name">remove</span> package --purge 删除包，包括配置文件等</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> build-dep package 安装相关的编译环境</span><br><span class="line">sudo apt-<span class="builtin-name">get</span><span class="built_in"> upgrade </span>更新已安装的包</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> dist-upgrade 升级系统</span><br><span class="line">sudo apt-cache depends package 了解使用该包依赖那些包</span><br><span class="line">sudo apt-cache rdepends package 查看该包被哪些包依赖</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> source package  下载该包的源代码</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> clean &amp;&amp; sudo apt-<span class="builtin-name">get</span> autoclean 清理无用的包</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> check 检查是否有损坏的依赖</span><br></pre></td></tr></table></figure><a id="more"></a>]]></content>
-      
-      <categories>
-          
-          <category> CS </category>
-          
-          <category> linux </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> apt </tag>
             
         </tags>
       

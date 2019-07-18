@@ -127,6 +127,117 @@
   
   <article class="index-article card" itemscope itemtype="http://schema.org/Article">
     <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="http://www.lizq.top/2018/09/12/CS/Kubernetes/elk/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="LiZhiqiang">
+        <meta itemprop="description" content="Computer enthusiasts">
+        <meta itemprop="image" content="/images/github.jpg">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="Xuntian">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link post-title-link-external" href="/2018/09/12/CS/Kubernetes/elk/" itemprop="url">App Logs in K8s Cluster</a>
+      </h1>
+      <div class="post-meta">
+        
+        <span class="post-date">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2018-09-12T00:00:00+08:00">2018-09-12 </time></span>
+        </span>
+        
+        
+        
+        <span class="post-meta-divider divider">|</span>
+        
+        <span class="post-categories">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/k8s/" itemprop="url" rel="index"><span itemprop="name">k8s</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/k8s/log/" itemprop="url" rel="index"><span itemprop="name">log</span></a></span>
+        </span>
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      
+      <p>近期实践了在k8s集群内对各个应用的日志处理，起因是开发那边反应服务器环境调试的时候查看日志特别麻烦，毕竟在开发本地毫无问题的代码在服务器上没有bug的概率还是比较低的。之前也有上elastic技术栈的计划，但是做得并没有那么完善。    </p>
+<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>在k8s集群中，可以将日志简单得分为三类：节点级别日志、集群级别日志和运行在集群内的应用日志，这里仅仅实践了集群内的应用日志。<br>elastic技术栈的大致架构为： app —&gt; filebeat（fluenetd,logstash） —&gt; elasticsearch —&gt; kibana<br>在CICD流程中自动化部署的服务上线后，日志收集工具实时监听应用的日志信息，并将日志推送到elasticsearch，开发就可以在kibana上搜索到日志，考虑到logstash过于庞大，则用轻量级的filebeat替代     </p>
+      
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        
+        
+        
+        
+        <a class="post-tag button" href="/tags/k8s/" style="background: #fc6423;" rel="tag"><i class="fas fa-tags"></i>k8s</a>
+        
+        <a class="post-tag button" href="/tags/log/" style="background: #a3bb54;" rel="tag"><i class="fas fa-tags"></i>log</a>
+        
+        <a class="post-tag button" href="/tags/elk/" style="background: #47aaff;" rel="tag"><i class="fas fa-tags"></i>elk</a>
+        
+      </div>
+      
+    </footer>
+  </article>
+  
+  <article class="index-article card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
+      <link itemprop="mainEntityOfPage" href="http://www.lizq.top/2018/08/05/CS/Hackintosh/黑苹果/">
+      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <meta itemprop="name" content="LiZhiqiang">
+        <meta itemprop="description" content="Computer enthusiasts">
+        <meta itemprop="image" content="/images/github.jpg">
+      </span>
+      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <meta itemprop="name" content="Xuntian">
+      </span>
+    </div>
+    <header class="post-header">
+      <h1 class="post-title" itemprop="name headline">
+        <a class="post-title-link post-title-link-external" href="/2018/08/05/CS/Hackintosh/黑苹果/" itemprop="url">关于黑苹果的一些建议</a>
+      </h1>
+      <div class="post-meta">
+        
+        <span class="post-date">
+          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2018-08-05T00:00:00+08:00">2018-08-05 </time></span>
+        </span>
+        
+        
+        
+        <span class="post-meta-divider divider">|</span>
+        
+        <span class="post-categories">
+          
+          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/hackintosh/" itemprop="url" rel="index"><span itemprop="name">hackintosh</span></a></span>
+        </span>
+        
+        
+      </div>
+    </header>
+    <main class="post-main" itemprop="articleBody">
+      
+      <h2 id="由来"><a href="#由来" class="headerlink" title="由来"></a>由来</h2><p>作为一个程序员，怎么不对mac os x系统神往已久呢，于是在大学毕业能赚钱之后就立马买了一台Mac book pro，用了一段时间，感觉很好。对于一个运维来说，一个强大好用的终端胜过一切，对windows 10 我已经累觉不爱了，也不想总是在虚拟机里放ppt，于是在之前换上了ubuntu桌面版。老实说，ubuntu作为服务器操作系统确实强大，但是真的不适合最为工作机，一是缺少很多常用软件，二是桌面程序很不稳定，无奈之下走上了黑苹果的不归路。折腾黑苹果对我来说只是一种乐趣，虽说这浪费了我很多时间，甚至有点得不偿失了。<br>
+      
+    </main>
+    <footer class="post-footer">
+      
+      <div class="post-tags">
+        
+        
+        
+        
+        <a class="post-tag button" href="/tags/hackintosh/" style="background: #fc6423;" rel="tag"><i class="fas fa-tags"></i>hackintosh</a>
+        
+      </div>
+      
+    </footer>
+  </article>
+  
+  <article class="index-article card" itemscope itemtype="http://schema.org/Article">
+    <div class="post-block">
       <link itemprop="mainEntityOfPage" href="http://www.lizq.top/2018/07/11/EM/投资/超额收益/">
       <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
         <meta itemprop="name" content="LiZhiqiang">
@@ -290,81 +401,6 @@
   
   <article class="index-article card" itemscope itemtype="http://schema.org/Article">
     <div class="post-block">
-      <link itemprop="mainEntityOfPage" href="http://www.lizq.top/2018/01/18/CS/Linux/shell/">
-      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <meta itemprop="name" content="LiZhiqiang">
-        <meta itemprop="description" content="Computer enthusiasts">
-        <meta itemprop="image" content="/images/github.jpg">
-      </span>
-      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-        <meta itemprop="name" content="Xuntian">
-      </span>
-    </div>
-    <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/2018/01/18/CS/Linux/shell/" itemprop="url">Shell</a>
-      </h1>
-      <div class="post-meta">
-        
-        <span class="post-date">
-          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2018-01-18T00:00:00+08:00">2018-01-18 </time></span>
-        </span>
-        
-        
-        
-        <span class="post-meta-divider divider">|</span>
-        
-        <span class="post-categories">
-          
-          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/linux/shell/" itemprop="url" rel="index"><span itemprop="name">shell</span></a></span>
-        </span>
-        
-        
-      </div>
-    </header>
-    <main class="post-main" itemprop="articleBody">
-      
-      <ul>
-<li>Linux操作系统通过kernel(内核)控制底层硬件，如内存管理、进程调度、鼠标键盘的驱动等，但是用户无法通过kernel对计算机进行控制，而是通过shell与kernel通信，达到控制计算机的目的</li>
-<li>Shell分为两种，CLI和GUI</li>
-</ul>
-<h2 id="Shell命令行"><a href="#Shell命令行" class="headerlink" title="Shell命令行"></a>Shell命令行</h2><h3 id="Linux下bash快捷键"><a href="#Linux下bash快捷键" class="headerlink" title="Linux下bash快捷键"></a>Linux下bash快捷键</h3><ul>
-<li>Ctrl+A: 切换到命令行开始</li>
-<li>Ctrl+E: 切换到命令行末尾</li>
-<li>Ctrl+L: 清屏，相当于clear</li>
-<li>Ctrl+U: 清除剪切光标之前的内容</li>
-<li>Ctrl+K: 清除剪切光标之后的内容</li>
-<li>Ctrl+Y: 粘贴刚才删除的字符</li>
-<li>Ctrl+R: 在历史命令中查找</li>
-<li>Ctrl+C: 终止命令</li>
-<li>Ctrl+D: 退出当前终端</li>
-<li>Ctrl+Z: 转入后台运行</li>
-<li>!!:     重复执行上一条命令</li>
-<li>!$:     显示系统最近的一条参数</li>
-<li>history 系统命令历史，不只是当前终端的命令历史，而是整个系统的</li>
-<li>!字符 重复执行之前最近一个以该字符开头的命令</li>
-<li>!数字 按照历史记录的序号执行命令</li>
-<li>!?abc 重复执行之前包含abc的命令</li>
-<li>!-n   重复执行n个命令之前的那个命令</li>
-<li>esc + . 重复调用上一个命令的参数，但不重复执行上一个命令
-      
-    </main>
-    <footer class="post-footer">
-      
-      <div class="post-tags">
-        
-        
-        
-        
-        <a class="post-tag button" href="/tags/shell/" style="background: #fc6423;" rel="tag"><i class="fas fa-tags"></i>shell</a>
-        
-      </div>
-      
-    </footer>
-  </article>
-  
-  <article class="index-article card" itemscope itemtype="http://schema.org/Article">
-    <div class="post-block">
       <link itemprop="mainEntityOfPage" href="http://www.lizq.top/2018/01/18/CS/Linux/apt/">
       <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
         <meta itemprop="name" content="LiZhiqiang">
@@ -416,59 +452,6 @@
     </footer>
   </article>
   
-  <article class="index-article card" itemscope itemtype="http://schema.org/Article">
-    <div class="post-block">
-      <link itemprop="mainEntityOfPage" href="http://www.lizq.top/2018/01/04/CS/Linux/磁盘管理/">
-      <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <meta itemprop="name" content="LiZhiqiang">
-        <meta itemprop="description" content="Computer enthusiasts">
-        <meta itemprop="image" content="/images/github.jpg">
-      </span>
-      <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-        <meta itemprop="name" content="Xuntian">
-      </span>
-    </div>
-    <header class="post-header">
-      <h1 class="post-title" itemprop="name headline">
-        <a class="post-title-link post-title-link-external" href="/2018/01/04/CS/Linux/磁盘管理/" itemprop="url">磁盘管理</a>
-      </h1>
-      <div class="post-meta">
-        
-        <span class="post-date">
-          <i class="far fa-calendar-plus"></i><span><time title="post-date" itemprop="dateCreated datePublished" datetime="2018-01-04T00:00:00+08:00">2018-01-04 </time></span>
-        </span>
-        
-        
-        
-        <span class="post-meta-divider divider">|</span>
-        
-        <span class="post-categories">
-          
-          <i class="far fa-folder-open"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a></span><i class="fas fa-angle-right"></i><span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/CS/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a></span>
-        </span>
-        
-        
-      </div>
-    </header>
-    <main class="post-main" itemprop="articleBody">
-      
-      <h2 id="df命令"><a href="#df命令" class="headerlink" title="df命令"></a>df命令</h2><figure class="hljs highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby">a或--all：包含全部的文件系统；</span></span><br><span class="line"><span class="ruby">--block-size=&lt;区块大小&gt;：以指定的区块大小来显示区块数目；</span></span><br><span class="line"><span class="ruby">-h或--human-readable：以可读性较高的方式来显示信息；</span></span><br><span class="line"><span class="ruby">-H或--si：与-h参数相同，但在计算时是以<span class="number">1000</span> Bytes为换算单位而非<span class="number">1024</span> Bytes；</span></span><br><span class="line"><span class="ruby">-i或--inodes：显示inode的信息；</span></span><br><span class="line"><span class="ruby">-k或--kilobytes：指定区块大小为<span class="number">1024</span>字节；</span></span><br><span class="line"><span class="ruby">-l或--local：仅显示本地端的文件系统；</span></span><br><span class="line"><span class="ruby">-m或--megabytes：指定区块大小为<span class="number">1048576</span>字节；</span></span><br><span class="line"><span class="ruby">--no-sync：在取得磁盘使用信息前，不要执行sync指令，此为预设值；</span></span><br><span class="line"><span class="ruby">-P或--portability：使用POSIX的输出格式；</span></span><br><span class="line"><span class="ruby">--sync：在取得磁盘使用信息前，先执行sync指令；</span></span><br><span class="line"><span class="ruby">-t&lt;文件系统类型&gt;或--type=&lt;文件系统类型&gt;：仅显示指定文件系统类型的磁盘信息；</span></span><br><span class="line"><span class="ruby">-T或--print-type：显示文件系统的类型；</span></span><br><span class="line"><span class="ruby">-x&lt;文件系统类型&gt;或--exclude-type=&lt;文件系统类型&gt;：不要显示指定文件系统类型的磁盘信息；</span></span><br><span class="line"><span class="ruby">--help：显示帮助；</span></span><br><span class="line"><span class="ruby">--version：显示版本信息。</span></span><br></pre></td></tr></table></figure>
-      
-    </main>
-    <footer class="post-footer">
-      
-      <div class="post-tags">
-        
-        
-        
-        
-        <a class="post-tag button" href="/tags/磁盘管理/" style="background: #fc6423;" rel="tag"><i class="fas fa-tags"></i>磁盘管理</a>
-        
-      </div>
-      
-    </footer>
-  </article>
-  
   
   <nav class="pagination">
     <a class="extend prev" rel="prev" href="/"><i class="fas fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fas fa-angle-right"></i></a>
@@ -501,7 +484,7 @@
     
     <div class="archives-count">
       <div class="site-count-title">Archives</div>
-      <div><a href="/archives/">21</a></div>
+      <div><a href="/archives/">23</a></div>
     </div>
     
     
@@ -519,7 +502,7 @@
     
     <div class="tags-count">
       <div class="site-count-title">Tags</div>
-      <div><a href="/tags/">22</a></div>
+      <div><a href="/tags/">23</a></div>
     </div>
     
   </div>
