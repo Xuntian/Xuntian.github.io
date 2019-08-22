@@ -3,6 +3,31 @@
   
     
     <entry>
+      <title>Gitlab性能监控</title>
+      <link href="/2019/07/18/CS/Git/gitlab%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7/"/>
+      <url>/2019/07/18/CS/Git/gitlab%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7/</url>
+      <content type="html"><![CDATA[<p>Gitlab项目自带了非常完备的项目监控方案，在这里做一些简单的介绍。<br>官方文档里提到过下面几种监控</p><ul><li>Performance Bar</li><li>Monitoring GitLab with Prometheus</li><li>GitLab Performance Monitoring with Influxdb and Grafana</li></ul><a id="more"></a><h3 id="Performance-Bar"><a href="#Performance-Bar" class="headerlink" title="Performance Bar"></a>Performance Bar</h3><p>在Admin area中Settings &gt; Metrics and Profiling &gt; Profiling - Performance bar开启Performance Bar<br><img src="./performance_bar_configuration_settings.png" alt="performance_bar_configuration_settings"><br><img src="./performance_bar.png" alt="performance_bar"></p><p>这个监控功能很弱，只是用于在web页面端一次性显示本次访问的接口和时间开销</p><h3 id="Monitoring-GitLab-with-Prometheus"><a href="#Monitoring-GitLab-with-Prometheus" class="headerlink" title="Monitoring GitLab with Prometheus"></a>Monitoring GitLab with Prometheus</h3><p>gitlab自带好几个服务的心跳数据exporter，例如，node_exporter，redis_exporter和postgres_exporter；并且gitlab默认安装并开启了Prometheus服务，各类的exporters会将监控数据发送给Prometheus，所以只需要配置一下Prometheus就可以查看各类的监控数据了<br><figure class="hljs highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">prometheus['listen_address'] = ':<span class="number">9090</span>'</span><br><span class="line"><span class="meta"># or</span></span><br><span class="line">prometheus['listen_address'] = '0.0.0.0:<span class="number">9090</span>'</span><br></pre></td></tr></table></figure></p><p><img src="./prometheus.png" alt="prometheus"></p><h3 id="GitLab-Performance-Monitoring-with-Influxdb-and-Grafana"><a href="#GitLab-Performance-Monitoring-with-Influxdb-and-Grafana" class="headerlink" title="GitLab Performance Monitoring with Influxdb and Grafana"></a>GitLab Performance Monitoring with Influxdb and Grafana</h3><h4 id="配置influxdb"><a href="#配置influxdb" class="headerlink" title="配置influxdb"></a>配置influxdb</h4><figure class="hljs highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># influxdb配置文件</span></span><br><span class="line">[meta]</span><br><span class="line">  <span class="attr">dir</span> = <span class="string">"/var/lib/influxdb/meta"</span></span><br><span class="line"></span><br><span class="line">[data]</span><br><span class="line">  <span class="attr">dir</span> = <span class="string">"/var/lib/influxdb/data"</span></span><br><span class="line">  <span class="attr">engine</span> = <span class="string">"tsm1"</span></span><br><span class="line">  <span class="attr">wal-dir</span> = <span class="string">"/var/lib/influxdb/wal"</span></span><br><span class="line"></span><br><span class="line">[admin]</span><br><span class="line">  <span class="attr">enabled</span> = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">[http]</span><br><span class="line">  <span class="attr">enabled</span> = <span class="literal">true</span></span><br><span class="line">  <span class="attr">auth-enabled</span> = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">[[udp]]</span><br><span class="line">  <span class="attr">enabled</span> = <span class="literal">true</span></span><br><span class="line">  <span class="attr">bind-address</span> = <span class="string">":8089"</span></span><br><span class="line">  <span class="attr">database</span> = <span class="string">"gitlab"</span></span><br><span class="line">  <span class="attr">batch-size</span> = <span class="number">1000</span></span><br><span class="line">  <span class="attr">batch-pending</span> = <span class="number">5</span></span><br><span class="line">  <span class="attr">batch-timeout</span> = <span class="string">"1s"</span></span><br><span class="line">  <span class="attr">read-buffer</span> = <span class="number">209715200</span></span><br></pre></td></tr></table></figure><p>用docker启动influxdb，加入存放配置文件的volume，开放8089（udp，用于gitlab推送数据），8086（grafana访问数据），8083（admin panel)<br><figure class="hljs highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker run -dti --name influxdb -v influxdb<span class="selector-class">.conf</span>:/etc/influxdb/influxdb<span class="selector-class">.conf</span>:ro \</span><br><span class="line">    -<span class="selector-tag">p</span> <span class="number">8089</span>:<span class="number">8089</span>/udp -<span class="selector-tag">p</span> <span class="number">8086</span>:<span class="number">8086</span> -<span class="selector-tag">p</span> <span class="number">8083</span>:<span class="number">8083</span> \</span><br><span class="line">    -e INFLUXDB_ADMIN_ENABLED=true \</span><br><span class="line">    -e INFLUXDB_ADMIN_USER=&#123;user&#125; \</span><br><span class="line">    -e INFLUXDB_ADMIN_PASSWORD=&#123;passwd&#125; \</span><br><span class="line">    influxdb</span><br></pre></td></tr></table></figure></p><h4 id="配置gitlab"><a href="#配置gitlab" class="headerlink" title="配置gitlab"></a>配置gitlab</h4><p>在Admin area中的Settings &gt; Metrics做如下配置，influxDB host按自己的情况填写<br><img src="./metrics_gitlab_configuration_settings.png" alt="metrics_gitlab_configuration_settings"><br>然后gitlab-ctl restrat 重启gitlab的各项服务</p><h3 id="配置grafana"><a href="#配置grafana" class="headerlink" title="配置grafana"></a>配置grafana</h3><p>同样的，用docker启动grafana<br><figure class="hljs highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">run</span> -dti <span class="comment">--name grafana -p 3000:3000 -e GF_SECURITY_ADMIN_PASSWORD=&#123;passwd&#125; grafana/grafana</span></span><br></pre></td></tr></table></figure></p><p>启动后在grafana的web界面根据influxdb的配置添加influxdb的数据源，就可以在dashboard中看到gitlab的监控数据了<br><img src="./grafana.png" alt="grafana"></p>]]></content>
+      
+      <categories>
+          
+          <category> CS </category>
+          
+          <category> application </category>
+          
+          <category> gitlab </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> gitlab </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>Gitaly</title>
       <link href="/2019/07/18/CS/Git/gitaly/"/>
       <url>/2019/07/18/CS/Git/gitaly/</url>
@@ -24,31 +49,6 @@
             <tag> gitlab </tag>
             
             <tag> gitaly </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    <entry>
-      <title>Gitlab性能监控</title>
-      <link href="/2019/07/18/CS/Git/gitlab%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7/"/>
-      <url>/2019/07/18/CS/Git/gitlab%E6%80%A7%E8%83%BD%E7%9B%91%E6%8E%A7/</url>
-      <content type="html"><![CDATA[<p>Gitlab项目自带了非常完备的项目监控方案，在这里做一些简单的介绍。<br>官方文档里提到过下面几种监控</p><ul><li>Performance Bar</li><li>Monitoring GitLab with Prometheus</li><li>GitLab Performance Monitoring with Influxdb and Grafana</li></ul><a id="more"></a><h3 id="Performance-Bar"><a href="#Performance-Bar" class="headerlink" title="Performance Bar"></a>Performance Bar</h3><p>在Admin area中Settings &gt; Metrics and Profiling &gt; Profiling - Performance bar开启Performance Bar<br><img src="./performance_bar_configuration_settings.png" alt="performance_bar_configuration_settings"><br><img src="./performance_bar.png" alt="performance_bar"></p><p>这个监控功能很弱，只是用于在web页面端一次性显示本次访问的接口和时间开销</p><h3 id="Monitoring-GitLab-with-Prometheus"><a href="#Monitoring-GitLab-with-Prometheus" class="headerlink" title="Monitoring GitLab with Prometheus"></a>Monitoring GitLab with Prometheus</h3><p>gitlab自带好几个服务的心跳数据exporter，例如，node_exporter，redis_exporter和postgres_exporter；并且gitlab默认安装并开启了Prometheus服务，各类的exporters会将监控数据发送给Prometheus，所以只需要配置一下Prometheus就可以查看各类的监控数据了<br><figure class="hljs highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">prometheus['listen_address'] = ':<span class="number">9090</span>'</span><br><span class="line"><span class="meta"># or</span></span><br><span class="line">prometheus['listen_address'] = '0.0.0.0:<span class="number">9090</span>'</span><br></pre></td></tr></table></figure></p><p><img src="./prometheus.png" alt="prometheus"></p><h3 id="GitLab-Performance-Monitoring-with-Influxdb-and-Grafana"><a href="#GitLab-Performance-Monitoring-with-Influxdb-and-Grafana" class="headerlink" title="GitLab Performance Monitoring with Influxdb and Grafana"></a>GitLab Performance Monitoring with Influxdb and Grafana</h3><h4 id="配置influxdb"><a href="#配置influxdb" class="headerlink" title="配置influxdb"></a>配置influxdb</h4><figure class="hljs highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># influxdb配置文件</span></span><br><span class="line">[meta]</span><br><span class="line">  <span class="attr">dir</span> = <span class="string">"/var/lib/influxdb/meta"</span></span><br><span class="line"></span><br><span class="line">[data]</span><br><span class="line">  <span class="attr">dir</span> = <span class="string">"/var/lib/influxdb/data"</span></span><br><span class="line">  <span class="attr">engine</span> = <span class="string">"tsm1"</span></span><br><span class="line">  <span class="attr">wal-dir</span> = <span class="string">"/var/lib/influxdb/wal"</span></span><br><span class="line"></span><br><span class="line">[admin]</span><br><span class="line">  <span class="attr">enabled</span> = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">[http]</span><br><span class="line">  <span class="attr">enabled</span> = <span class="literal">true</span></span><br><span class="line">  <span class="attr">auth-enabled</span> = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">[[udp]]</span><br><span class="line">  <span class="attr">enabled</span> = <span class="literal">true</span></span><br><span class="line">  <span class="attr">bind-address</span> = <span class="string">":8089"</span></span><br><span class="line">  <span class="attr">database</span> = <span class="string">"gitlab"</span></span><br><span class="line">  <span class="attr">batch-size</span> = <span class="number">1000</span></span><br><span class="line">  <span class="attr">batch-pending</span> = <span class="number">5</span></span><br><span class="line">  <span class="attr">batch-timeout</span> = <span class="string">"1s"</span></span><br><span class="line">  <span class="attr">read-buffer</span> = <span class="number">209715200</span></span><br></pre></td></tr></table></figure><p>用docker启动influxdb，加入存放配置文件的volume，开放8089（udp，用于gitlab推送数据），8086（grafana访问数据），8083（admin panel)<br><figure class="hljs highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker run -dti --name influxdb -v influxdb<span class="selector-class">.conf</span>:/etc/influxdb/influxdb<span class="selector-class">.conf</span>:ro \</span><br><span class="line">    -<span class="selector-tag">p</span> <span class="number">8089</span>:<span class="number">8089</span>/udp -<span class="selector-tag">p</span> <span class="number">8086</span>:<span class="number">8086</span> -<span class="selector-tag">p</span> <span class="number">8083</span>:<span class="number">8083</span> \</span><br><span class="line">    -e INFLUXDB_ADMIN_ENABLED=true \</span><br><span class="line">    -e INFLUXDB_ADMIN_USER=&#123;user&#125; \</span><br><span class="line">    -e INFLUXDB_ADMIN_PASSWORD=&#123;passwd&#125; \</span><br><span class="line">    influxdb</span><br></pre></td></tr></table></figure></p><h4 id="配置gitlab"><a href="#配置gitlab" class="headerlink" title="配置gitlab"></a>配置gitlab</h4><p>在Admin area中的Settings &gt; Metrics做如下配置，influxDB host按自己的情况填写<br><img src="./metrics_gitlab_configuration_settings.png" alt="metrics_gitlab_configuration_settings"><br>然后gitlab-ctl restrat 重启gitlab的各项服务</p><h3 id="配置grafana"><a href="#配置grafana" class="headerlink" title="配置grafana"></a>配置grafana</h3><p>同样的，用docker启动grafana<br><figure class="hljs highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">run</span> -dti <span class="comment">--name grafana -p 3000:3000 -e GF_SECURITY_ADMIN_PASSWORD=&#123;passwd&#125; grafana/grafana</span></span><br></pre></td></tr></table></figure></p><p>启动后在grafana的web界面根据influxdb的配置添加influxdb的数据源，就可以在dashboard中看到gitlab的监控数据了<br><img src="./grafana.png" alt="grafana"></p>]]></content>
-      
-      <categories>
-          
-          <category> CS </category>
-          
-          <category> application </category>
-          
-          <category> gitlab </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> gitlab </tag>
             
         </tags>
       
@@ -101,6 +101,33 @@
             <tag> k8s </tag>
             
             <tag> hpa </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>Pause容器</title>
+      <link href="/2018/12/20/CS/Kubernetes/Pause/"/>
+      <url>/2018/12/20/CS/Kubernetes/Pause/</url>
+      <content type="html"><![CDATA[<blockquote><p>在k8s集群正常运行的pod中，可以看到每个应用pod都对应有一个pause的docker容器，那么这个容器有什么作用呢？</p></blockquote><blockquote><p>k8s通过对每个容器的命名空间配置，将Pod的网络、进程以及进程间通信命名空间都统一到pause的容器中。命名空间是Liunx内核的一个功能，是指从虚拟机层面上对机器的资源进行分组隔离，使用相同命名空间的每个容器都共享一套资源。使用相同命名空间的Pod容器，在各自应用内调用请求就像在本机中互相访问一样，这样资源的调度单位就非常巧妙地变为了Pod。</p></blockquote><a id="more"></a><blockquote><p>在Linux系统启动时，任何进程都是由第一个进程init派生出来的，因此在正常的情况下，它们都拥有相同的命名空间。当一个进程结束或者异常退出时，其父进程负责处理它的返回结果，以让操作系统正常回收其进程空间。</p></blockquote><blockquote><p>但也有一些其他的情况，比如父进程没有很好的处理子进程的退出情况，就是说没有调用wait命令来处理其返回代码，其原因可能是代码写得不好或者意外崩溃了。</p></blockquote><blockquote><p>此时，操作系统会将失去父进程的进程挂到PID为1的进程下，一般场景下就是init进程，而这种进程就被成为Orphan Process。在docker容器中，每个容器具有独立的命名空间，其应用进程自身就是第一个进程，PId=1,如果应用进程的子进程又调用fork或者exec参数创建了更多的子进程，那么当出现问题时，它们就会被挂到应用进程下，应用进程和init不一样，并没有处理僵尸进程的逻辑。</p></blockquote><blockquote><p>于是pause的作用就是处理子进程返回时的各种信号，以让其顺利退出。它的代码也非常简单，使用C语言编写，如下<br><figure class="hljs highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/wait.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STRINGIFY(x) #x</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> VERSION_STRING(x) STRINGIFY(x)</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> VERSION</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> VERSION HEAD</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sigdown</span><span class="params">(<span class="keyword">int</span> signo)</span> </span>&#123;</span><br><span class="line">  psignal(signo, <span class="string">"Shutting down, got signal"</span>);</span><br><span class="line">  <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sigreap</span><span class="params">(<span class="keyword">int</span> signo)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (waitpid(<span class="number">-1</span>, <span class="literal">NULL</span>, WNOHANG) &gt; <span class="number">0</span>)</span><br><span class="line">    ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">int</span> i;</span><br><span class="line">  <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; argc; ++i) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!strcasecmp(argv[i], <span class="string">"-v"</span>)) &#123;</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"pause.c %s\n"</span>, VERSION_STRING(VERSION));</span><br><span class="line">      <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (getpid() != <span class="number">1</span>)</span><br><span class="line">    <span class="comment">/* Not an error because pause sees use outside of infra containers. */</span></span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"Warning: pause should be the first process\n"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (sigaction(SIGINT, &amp;(struct sigaction)&#123;.sa_handler = sigdown&#125;, <span class="literal">NULL</span>) &lt; <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">if</span> (sigaction(SIGTERM, &amp;(struct sigaction)&#123;.sa_handler = sigdown&#125;, <span class="literal">NULL</span>) &lt; <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">if</span> (sigaction(SIGCHLD, &amp;(struct sigaction)&#123;.sa_handler = sigreap,</span><br><span class="line">                                             .sa_flags = SA_NOCLDSTOP&#125;,</span><br><span class="line">                <span class="literal">NULL</span>) &lt; <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (;;)</span><br><span class="line">    pause();</span><br><span class="line">  <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">"Error: infinite loop terminated\n"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">42</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p></blockquote><blockquote><p>从代码中可以看出，pause在启动时向系统注册了两个系统信号回调函数（sigdown, sigreap）后，便进入了无止境的睡眠，其中sigdown只是简单地处理任务终止请求，sigreap则调用系统wait命令来接管每个孤儿进程，当其退出时及时在进程表中做好清除标记，以让操作系统回收相关资源。pause是一个资源汇集平台，将Pod中的各类资源打通并形成统一的部署结构，更有利于微服务集群管理。</p></blockquote>]]></content>
+      
+      <categories>
+          
+          <category> CS </category>
+          
+          <category> k8s </category>
+          
+          <category> pause </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> k8s </tag>
+            
+            <tag> pause </tag>
             
         </tags>
       
@@ -280,29 +307,6 @@
     </entry>
     
     <entry>
-      <title>Apt</title>
-      <link href="/2018/01/18/CS/Linux/apt/"/>
-      <url>/2018/01/18/CS/Linux/apt/</url>
-      <content type="html"><![CDATA[<h2 id="apt-命令"><a href="#apt-命令" class="headerlink" title="apt 命令"></a>apt 命令</h2><figure class="hljs highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-<span class="builtin-name">get</span> update  更新源</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> install package 安装包</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> <span class="builtin-name">remove</span> package 删除包</span><br><span class="line">sudo apt-cache search package 搜索软件包</span><br><span class="line">sudo apt-cache show package  获取包的相关信息，如说明、大小、版本等</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> install package --reinstall  重新安装包</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> -f install  修复安装</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> <span class="builtin-name">remove</span> package --purge 删除包，包括配置文件等</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> build-dep package 安装相关的编译环境</span><br><span class="line">sudo apt-<span class="builtin-name">get</span><span class="built_in"> upgrade </span>更新已安装的包</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> dist-upgrade 升级系统</span><br><span class="line">sudo apt-cache depends package 了解使用该包依赖那些包</span><br><span class="line">sudo apt-cache rdepends package 查看该包被哪些包依赖</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> source package  下载该包的源代码</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> clean &amp;&amp; sudo apt-<span class="builtin-name">get</span> autoclean 清理无用的包</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> check 检查是否有损坏的依赖</span><br></pre></td></tr></table></figure><a id="more"></a>]]></content>
-      
-      <categories>
-          
-          <category> CS </category>
-          
-          <category> linux </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> apt </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    <entry>
       <title>Shell</title>
       <link href="/2018/01/18/CS/Linux/shell/"/>
       <url>/2018/01/18/CS/Linux/shell/</url>
@@ -322,6 +326,29 @@
         <tags>
             
             <tag> shell </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>Apt</title>
+      <link href="/2018/01/18/CS/Linux/apt/"/>
+      <url>/2018/01/18/CS/Linux/apt/</url>
+      <content type="html"><![CDATA[<h2 id="apt-命令"><a href="#apt-命令" class="headerlink" title="apt 命令"></a>apt 命令</h2><figure class="hljs highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-<span class="builtin-name">get</span> update  更新源</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> install package 安装包</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> <span class="builtin-name">remove</span> package 删除包</span><br><span class="line">sudo apt-cache search package 搜索软件包</span><br><span class="line">sudo apt-cache show package  获取包的相关信息，如说明、大小、版本等</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> install package --reinstall  重新安装包</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> -f install  修复安装</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> <span class="builtin-name">remove</span> package --purge 删除包，包括配置文件等</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> build-dep package 安装相关的编译环境</span><br><span class="line">sudo apt-<span class="builtin-name">get</span><span class="built_in"> upgrade </span>更新已安装的包</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> dist-upgrade 升级系统</span><br><span class="line">sudo apt-cache depends package 了解使用该包依赖那些包</span><br><span class="line">sudo apt-cache rdepends package 查看该包被哪些包依赖</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> source package  下载该包的源代码</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> clean &amp;&amp; sudo apt-<span class="builtin-name">get</span> autoclean 清理无用的包</span><br><span class="line">sudo apt-<span class="builtin-name">get</span> check 检查是否有损坏的依赖</span><br></pre></td></tr></table></figure><a id="more"></a>]]></content>
+      
+      <categories>
+          
+          <category> CS </category>
+          
+          <category> linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> apt </tag>
             
         </tags>
       
